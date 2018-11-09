@@ -32,3 +32,4 @@ i
 __pycache__
 venv/
 mydatabase
+myvenv
