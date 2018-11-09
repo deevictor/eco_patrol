@@ -1,0 +1,29 @@
+{% load i18n %}
+
+{% if current_page.has_previous or current_page.has_next %}
+<section>
+    <div class="center">
+        <nav aria-label="Страницы">
+            <ul class="pagination">
+                <li class="{% if not current_page.has_previous %} disabled{% endif %} previous">
+                    <a{% if current_page.has_previous %} href="?{{ page_var }}={{ current_page.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}"{% endif %} aria-label="Назад">
+                        <i class="arrow_left"></i>
+                    </a>
+                </li>
+
+            {% for page in current_page.visible_page_range %}
+<li{% if page == current_page.number %} class="active"{% endif %}>
+    <a href="?{{ page_var }}={{ page }}{% if querystring %}&{{ querystring }}{% endif %}">{{ page }}</a>
+</li>
+{% endfor %}
+
+                <li class="next{% if not current_page.has_next %} disabled{% endif %}">
+                    <a {% if current_page.has_next %} href="?{{ page_var }}={{ current_page.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}"{% endif %} aria-label="Вперед">
+                        <i class="arrow_right"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+{% endif %}

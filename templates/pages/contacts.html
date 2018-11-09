@@ -1,0 +1,70 @@
+{% extends 'pages/page.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <div id="page-content">
+        <div class="container">
+            <section class="page-title">
+                <h1 class="pull-left">Контакты</h1>
+            </section>
+            <!--end section-title-->
+        </div>
+
+        <section class="block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3">
+                        <h3>Контактная информация</h3>
+                        <div class="box">
+                            <address>
+                                <strong>Адрес</strong>
+                                <figure>680000, г.Хабаровск, ул. Ленина, 4 оф.3 680000, г.Хабаровск, ул. Ленина, 4 оф.3</figure>
+                                <br>
+                                <strong>Телефон</strong>
+                                <figure>(4212) 46-18-78</figure>
+                                <figure>(4212) 62-65-69</figure>
+                                <br>
+                                <strong>Email</strong>
+                                <figure><a href="#">voop@mail.ru</a></figure>
+                                <br>
+                                <strong>Подробнее об организации</strong>
+                                <figure><a href="http://gkhkontrol.ru/regions/dfo/khabarovski-krai">gkhkontrol.ru</a></figure>
+                            </address>
+                        </div>
+                    </div>
+                    <!--end col-md-3-->
+                    <div class="col-md-9 col-sm-9">
+                        {% if flag %}
+                            <h4>Сообщение отправлено!</h4>
+                        {% else %}
+                            <form method="post" class="form inputs-underline" novalidate>{% csrf_token %}
+{#                                {{ form.errors }}#}
+                                {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+                                {% for field in form.visible_fields %}
+                                    <div class="form-group">
+                                        {{ field.label_tag }}
+                                        {{ field }}
+                                        <span class="text-danger">{{ field.errors.as_text }}</span>
+                                    </div>
+                                {% endfor %}
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary icon shadow">
+                                        Отправить сообщение<i class="fa fa-caret-right"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+{% endblock %}

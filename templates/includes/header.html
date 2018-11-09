@@ -1,0 +1,46 @@
+{% load pages_tags mezzanine_tags i18n staticfiles %}
+
+<header id="page-header">
+    <nav>
+        <div class="row">
+            <div class="col-sm-2">
+                <a href="/" class="brand"><img src="{% static 'img/logo.jpg' %}" alt="" height="30"></a>
+            </div>
+
+            <div class="col-sm-7 logopic">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <a href="https://www.khabarovskadm.ru/ ">
+                            <img src="{% static 'img/hb.jpg' %}" alt="">
+                        </a>
+
+                    </div>
+
+                    <div class="col-sm-3">
+                        <a href="http://gkhkontrol.ru/regions/dfo/khabarovski-krai">
+                            <img src="{% static 'img/jkh.jpg' %}" alt="">
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="http://gkh27.ru/">
+                            <img src="{% static 'img/hk.jpg' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-sm-3">
+                <div class="primary-nav has-mega-menu pull-right">
+                    {% page_menu "pages/menus/dropdown.html" %}
+                </div>
+                <div class="nav-btn">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

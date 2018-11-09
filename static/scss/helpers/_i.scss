@@ -1,0 +1,125 @@
+.label {
+  &-wrapper {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 0;
+    background: #fff;
+    z-index: 1000;
+    height: calc(100% - 80px);
+    overflow-y: scroll;
+    .search-form {
+      padding: 2rem;
+      input, .btn, textarea, select {
+        padding: 8px;
+      }
+    }
+    form {
+      @include box-shadow(none);
+    }
+    input[type="text"], input[type="email"], input[type="date"], input[type="time"], input[type="search"], input[type="password"], input[type="number"], input[type="tel"], textarea.form-control {
+      color: inherit;
+    }
+    &-close {
+      position: absolute;
+      top: 23px;
+      right: 20px;
+      font-size: 25px;
+      border: 2px solid;
+      border-radius: 50%;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      line-height: 24px;
+      vertical-align: middle;
+      z-index: 999;
+      i {
+        line-height: 26px;
+      }
+    }
+  }
+}
+
+.error {
+  color: $color-red;
+}
+
+.page-wrapper {
+  height: auto;
+}
+
+.page-index {
+  .page-wrapper {
+    height: 100%;
+  }
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  #page-content {
+    flex: 1;
+    height: 100%;
+    display: block;
+  }
+  #page-header {
+    min-height: 42px;
+  }
+  #page-footer {
+    min-height: 99px;
+    .footer-wrapper {
+      margin: 0;
+      border: 0 none;
+      background-color: #fff;
+      .block {
+        padding: 15px 0;
+        @include box-shadow(0px -1px 2px rgba(0, 0, 0, 0.2));
+      }
+    }
+  }
+}
+
+#balloonPopover {
+  .popover-inner {
+    width: 200px;
+    background: #fff;
+    text-align: center;
+    .btn {
+      margin: 1rem;
+    }
+  }
+}
+
+body .primary-nav, body .secondary-nav {
+  border: 0 none;
+  padding: 0;
+  margin: 0;
+}
+
+.balloon {
+    position: fixed;
+    max-height: calc(100% - 75px);
+    min-height: 250px;
+    width: 400px;
+    max-width: calc(100% - 20px);
+    right: -400px;
+    bottom: 65px;
+    background-color: #fff;
+    padding: 20px;
+    transition: right .1s;
+    z-index: 1000;
+    @media only screen and (max-width: 767px) {
+        bottom: 130px;
+        max-height: calc(100% - 140px);
+    }
+    p {
+        margin-top: 10px;
+    }
+}
+
+.copy-url {
+    resize: none;
+    white-space: nowrap;
+    overflow: hidden;
+}

@@ -1,0 +1,5 @@
+# Зависимости проекта для разработки
+-r requirements.pip
+
+pylint
+ipdb

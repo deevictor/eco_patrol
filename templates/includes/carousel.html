@@ -1,0 +1,25 @@
+{% load thumbnail %}
+<div class="gallery featured">
+    <div id="gallery-nav"></div>
+    <div class="owl-carousel" data-owl-items="5" data-owl-loop="1" data-owl-auto-width="0" data-owl-nav="1"
+        data-owl-dots="1" data-owl-nav-container="#gallery-nav">
+        {% for i in label_gallery %}
+        {% thumbnail i.image.image "70x70" crop="center" as im %}
+            <div class="footer-top-image" data-id="{{ i.label.id }}">
+                <img  src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            </div>
+        {% endthumbnail %}
+    {% endfor %}
+    </div>
+</div>
+
+<!-- <div>
+    {% for i in label_gallery %}
+        {% thumbnail i.image.image "70x70" crop="center" as im %}
+            <div class="footer-top-image" data-id="{{ i.label.id }}">
+                <img  src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            </div>
+        {% endthumbnail %}
+    {% endfor %}
+
+</div> -->

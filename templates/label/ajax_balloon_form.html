@@ -1,0 +1,15 @@
+<form action="{% url 'label:ajax_form' %}" method="post" id="ajax_form" enctype="multipart/form-data" novalidate>{% csrf_token %}
+    {{ form_label.errors }}
+    {% for hidden in form_label.hidden_fields %}{{ hidden }}{% endfor %}
+    {% for field in form_label.visible_fields %}
+        <div class="form-group">
+{#            {{ field.label_tag }}#}
+            {{ field }}
+            <span class="text-danger">{{ field.errors.as_text }}</span>
+        </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary pull-right">Отправить на рассмотрение</button>
+    </div>
+</form>

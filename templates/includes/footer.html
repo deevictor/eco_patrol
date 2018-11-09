@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<footer id="page-footer">
+    <div class="footer-wrapper">
+        <div class="block">
+
+            <div class="vertical-aligned-elements">
+                <div class="col-md-4 element">
+                    <div class="footer__text-left">
+                        <p data-toggle="modal" data-target="#myModal" style="display: inline">
+                            Проект «Конструктор городской среды» </br>
+                            реализуется при поддержке муниципального </br>
+                            гранта администрации города Хабаровска
+                        </p>
+                        <p class="footer__best-practice">Лучшие практики: </p>
+                    </div>
+                </div>
+                <div class="col-md-5 element">
+                    {% include 'includes/carousel.html' %}
+                </div>
+                <div class="col-md-3 element text-align-right">
+                    <span class="footer__social-title">Мы в социальных сетях: </span>
+                    <a href="https://www.facebook.com/gkhKontrol/" class="circle-icon"><i class="social_facebook"></i></a>
+                    <a href="https://www.youtube.com/channel/UCkhJs_oufXOR5HIF2Pcxc8g" class="circle-icon"><i class="social_youtube"></i></a>
+                    <a href="https://m.vk.com/gkh_kontrol_official" class="circle-icon"><i class="social_vkontakte"><img
+                                src="{% static 'img/vk.png' %}" width="14"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+<!--end page-footer-->

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static mezzanine_tags keyword_tags %}
+
+{% block meta_title %}
+{% if balloon %}
+    {% if balloon.about %}{{ balloon.about }}{% endif %}{{ balloon.category.title }}
+{% else %}
+    {{ page.meta_title }}
+{% endif %}
+{% endblock %}
+
+{% block meta_keywords %}
+
+{% if balloon %}
+    {{ balloon.description }}
+{% else %}
+
+{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}
+{% endif %}
+
+{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block extra_css %}
+    <style type="text/css">
+        .dropdown-menu [data-original-index="0"] {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.fancybox.min.css' %}">
+{% endblock %}
+
+{% block map %}
+
+    <div class="hero-section height-100percent has-map">
+        <div class="map-wrapper">
+            <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+            <div id="YMapsID" class="map YMaps YMaps-cursor-grab"></div>
+        </div>
+        <div class="label-wrapper">
+            <div class="form search-form inputs-underline">
+                <div class="section-title">
+                    <h2>Форма</h2>
+                </div>
+                {% include "label/ajax_balloon_form.html" %}
+            </div>
+            <a href="#" class="label-wrapper-close">
+                <i class="icon_close"></i>
+            </a>
+        </div>
+    </div>{{ get_static_prefix }}
+{% endblock %}
+
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/jquery.fancybox.min.js' %}"></script>
+    <script type="text/javascript">
+    var category = [{% for category in categories %}
+                        '{{ category.title }}'{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+    ];
+
+    var balloon_id = {% if balloon %}{{ balloon.id }}{% else %}0{% endif %}
+
+    $( document ).ready(function() {
+        $("#modal_button").click();
+    });
+
+    </script>
+    <script type="text/javascript" src="{% static 'js/map.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/form.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/map_filters.js' %}"></script>
+
+{% endblock %}
+
+{% block popup %}{% include "includes/popup.html" %}{% endblock %}
