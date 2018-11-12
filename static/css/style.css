@@ -9558,9 +9558,9 @@ form .status i {
     font-size: 10px;
     font-weight: 800;
     text-transform: uppercase;
-    margin-bottom: 0;
+    margin-bottom: 2px;
     position: relative;
-    bottom: -5px;
+    /*bottom: -5px;*/
 }
 
 /* line 305, ../scss/helpers/_forms.scss */
@@ -10888,4 +10888,23 @@ article > p > img {
         /*height: unset;*/
         padding-bottom: 25px;
     }
+}
+
+input[type="file"] {
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+input[type="file"] + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: #22a213;
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
 }

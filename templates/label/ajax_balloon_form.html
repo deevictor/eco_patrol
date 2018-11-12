@@ -7,6 +7,9 @@
             {% if field.name != 'description' %}
                 <div class="col-md-4 col-sm-6">
                     {{ field }}
+                    {% if field.name == 'attach' %}
+                        <label for="file">{{ field.label }}</label>
+                    {% endif %}
                     <span class="text-danger">{{ field.errors.as_text }}</span>
                 </div>
             {% endif %}
