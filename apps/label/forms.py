@@ -49,7 +49,7 @@ class LabelForm(forms.ModelForm):
                 'class': 'form-control'
             }),
             'description': forms.Textarea(attrs={
-                'rows': 5,
+                'rows': 3,
                 'placeholder': 'Описание',
                 'class': 'form-control'
             }),

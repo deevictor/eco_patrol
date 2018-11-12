@@ -1,6 +1,8 @@
 ymaps.ready(init);
 var myMap;
 var objectManager;
+PAGE_WIDTH = 768;
+ //взял  ширину страницы 768 px как за границу между .col-md (medium devices) и col-sm (small devices)
 
 function init() {
     // При возникновении событий, изменяющих состояние карты,
@@ -237,8 +239,8 @@ function init() {
                 BalloonContentLayout.superclass.clear.call(this);
             },
             onLabelClick: function () {
-                if ($(document).width() > 768) {
-                    $(".label-wrapper").css("width", "25%");
+                if ($(document).width() > PAGE_WIDTH) {
+                    $(".label-wrapper").css("width", "90%");
                 } else {
                     $(".label-wrapper").css("width", "80%");
                 }

@@ -8599,7 +8599,7 @@ input[type="date"]::-webkit-input-placeholder {
 
 /* line 75, ../scss/helpers/_forms.scss */
 .form-control {
-    background-color: transparent;
+    background-color: #22a213;
     height: auto;
 }
 
@@ -8975,9 +8975,7 @@ input[type="date"]::-webkit-input-placeholder {
 
 /* line 149, ../scss/helpers/_forms.scss */
 .hero-section .search-form {
-    position: absolute;
     z-index: 20;
-    height: 0;
     width: 100%;
 }
 
@@ -9574,7 +9572,7 @@ form .status i {
     -webkit-border-radius: 0px;
     border-radius: 0px;
     -webkit-appearance: none;
-    background-color: transparent;
+    background-color: #22a213;
     border: none;
     border-bottom: 2px solid rgba(0, 0, 0, 0.08);
     padding-left: 0;
@@ -10578,14 +10576,14 @@ body::before {
 
 /* line 2, ../scss/helpers/_i.scss */
 .label-wrapper {
-    position: absolute;
-    top: 80px;
-    right: 0;
+    position: fixed;
+    bottom: 80px;
+    right: 5%;
     width: 0;
-    background: #fff;
     z-index: 1000;
-    height: calc(100% - 80px);
-    overflow-y: scroll;
+    padding-top: 25px;
+    overflow-y: hidden;
+    background-color: #1c940e;
 }
 
 /* line 11, ../scss/helpers/_i.scss */
@@ -10874,15 +10872,20 @@ article > p > img {
 }
 
 @media screen and (max-width: 768px) {
-    .logopic {display:none;}
-    #page-footer {display:none !important;}
+    .logopic {
+        display: none;
+    }
+
+    #page-footer {
+        display: none !important;
+    }
+
     .label-wrapper {
         left: 0;
         right: 0;
         margin-left: auto;
         margin-right: auto;
-        height: unset;
+        /*height: unset;*/
         padding-bottom: 25px;
     }
-
 }
