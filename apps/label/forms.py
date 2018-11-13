@@ -21,6 +21,7 @@ class LabelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(LabelForm, self).__init__(*args, **kwargs)
         self.fields['category'].empty_label = 'Категория метки'
+        self.fields['attach'].label = "Выберите файлы"
 
     class Meta:
         model = Label
@@ -49,12 +50,15 @@ class LabelForm(forms.ModelForm):
                 'class': 'form-control'
             }),
             'description': forms.Textarea(attrs={
-                'rows': 5,
+                'rows': 3,
                 'placeholder': 'Описание',
                 'class': 'form-control'
             }),
             'point': forms.HiddenInput(),
-            'attach': forms.ClearableFileInput(attrs={'multiple': True}),
+            'attach': forms.ClearableFileInput(attrs={
+                'id': 'file',
+                'multiple': True
+            }),
         }
 
     def clean_attach(self):
