@@ -82,6 +82,10 @@ class Label(models.Model):
         default=False,
         verbose_name='Вывести в топ'
     )
+    solved = models.BooleanField(
+        default=False,
+        verbose_name='Проблема решена'
+    )
     decision = models.FileField(
         null=True, blank=True,
         upload_to='decision/',
@@ -139,4 +143,3 @@ class Comment(models.Model):
         name, date = self.name, self.submit_date
         text = self.text[:mezzanine_conf.COMMENT_PREVIEW_SIZE] + '...'
         return f'[{name} {date}] {text}'
-

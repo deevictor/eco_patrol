@@ -2,7 +2,6 @@
 from django.http import JsonResponse
 from django.template.loader import get_template
 
-
 from base.constants import URL_SHARE
 
 from .forms import LabelForm, CommentForm
@@ -16,13 +15,17 @@ def labels_json(request):
     Словарь можно получить по ссылке
     """
     geos = []
+    SOLVED_COLOR = '#3b5998'
 
     for label in Label.objects.filter(approved=True).select_related(
             'category'
     ).prefetch_related('image_set'):
-        # Если метка имеет категорию,
+        # Если метка решена делаем синей,
+        # иначе если метка имеет категорию,
         # задаем цвет этой категории, иначе ее цвет #000
-        if label.category:
+        if label.solved:
+            color = SOLVED_COLOR
+        elif label.category:
             color = label.category.color
         else:
             color = '#000000'

@@ -10,7 +10,7 @@ from .models import Category, Image, Label, Comment
 class CategoryAdmin(admin.ModelAdmin):
     """Отображает категории меток."""
 
-    list_display = ('title', 'get_color', )
+    list_display = ('title', 'get_color',)
 
     def get_color(self, obj):
         return mark_safe(
@@ -35,9 +35,10 @@ class LabelAdmin(AdminYMapMixin, admin.ModelAdmin):
     """Отображает метки для карты."""
 
     list_display = (
-        'name', 'category', 'phone', 'name', 'pub_time', 'approved', 'in_top'
+        'name', 'category', 'phone', 'name', 'pub_time', 'approved', 'in_top',
+        'solved'
     )
-    list_editable = ('approved', 'in_top')
+    list_editable = ('approved', 'in_top', 'solved')
     inlines = [ImageInline, CommentInline]
 
 
