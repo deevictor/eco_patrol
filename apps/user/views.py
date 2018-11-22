@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+from django.urls import reverse
+
 
 from .forms import LoginForm, UserForm
 
@@ -68,10 +70,14 @@ def login_user(request):
             else:
                 result['message'] = 'Учетная запись не активирована!'
         else:
+            reverse_html_link = '<br><a href="'\
+                               + reverse('user:password_reset')\
+                               + '">Сбросить пароль.</a>'
+            form.non_field_errors()[0] += reverse_html_link
             result.update(
                 errors=True,
                 data=form.errors,
-                message='Исправьте ошибки формы!'
+                message=form.non_field_errors()
             )
 
     return JsonResponse(result)
