@@ -560,10 +560,9 @@ body .secondary-nav ul.navigation li.has-child > .wrapper > .nav-wrapper > ul > 
     padding: 8px;
     cursor: pointer;
     position: absolute;
-    top: -2px;
     bottom: 0;
     height: 28px;
-    right: 0;
+    right: 10px;
     margin: auto;
     background-color: transparent;
     -moz-box-shadow: inset 0px 0px 0px 2px rgba(0, 0, 0, 0.4);
@@ -5894,7 +5893,6 @@ section:not(.block) h2 {
     -webkit-transition: 0.3s ease;
     transition: 0.3s ease;
     display: inline-block;
-    text-align: left;
     vertical-align: middle;
 }
 
@@ -6154,7 +6152,6 @@ section:not(.block) h2 {
     border: none;
     padding: 30px;
     display: table;
-    width: 100%;
 }
 
 /* line 420, ../scss/helpers/_classes.scss */
@@ -10885,8 +10882,13 @@ article > p > img {
         right: 0;
         margin-left: auto;
         margin-right: auto;
-        /*height: unset;*/
+        height: 100%;
+        bottom: 0;
         padding-bottom: 25px;
+    }
+
+    body .primary-nav, body .secondary-nav {
+        padding-right: 15px;
     }
 }
 
@@ -10908,3 +10910,4 @@ input[type="file"] + label {
     padding: 10px;
     cursor: pointer;
 }
+

@@ -72,12 +72,12 @@ INSTALLED_APPS = [
     'mezzanine.generic',
     'mezzanine.pages',
     'mezzanine.blog',
-
+    'mezzanine.accounts',
     'sorl.thumbnail',
-
     'feedback',
     'base',
     'label',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +132,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'wsgi.application'
 
+AUTH_USER_MODEL = 'user.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -178,7 +179,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 SITE_ID = 1
 
-AUTHENTICATION_BACKENDS = ('mezzanine.core.auth_backends.MezzanineBackend',)
+AUTHENTICATION_BACKENDS = ('mezzanine.core.auth_backends.MezzanineBackend',
+                           'django.contrib.auth.backends.ModelBackend',)
 
 # The numeric mode to set newly-uploaded files to. The value should be
 # a mode you'd pass directly to os.chmod.
@@ -253,12 +255,11 @@ ADMIN_MENU_ORDER = (
     (u"Содержимое", (
         "pages.Page",
         (u"Новости", "blog.BlogPost"),
-        # "blog.BlogCategory",
         (u"Медиа-библиотека", "fb_browse"),
         "feedback.Feedback",
     )),
     (u"Пользователи", (
-        "auth.User",
+        "user.User",
         "auth.Group",
     )),
     (u"Карта", (
@@ -274,8 +275,6 @@ ADMIN_MENU_ORDER = (
 
 PAGE_MENU_TEMPLATES = (
     (1, u'Главное меню', 'pages/menus/header_menu.html'),
-    # (2, u'Меню услуг', 'pages/menus/services_menu.html'),
-    # (3, u'Меню внизу', 'pages/menus/footer_menu.html'),
 )
 
 BLOG_SLUG = "news"
@@ -289,3 +288,6 @@ except ImportError:
     pass
 else:
     set_dynamic_settings(globals())
+
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'

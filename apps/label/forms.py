@@ -3,7 +3,7 @@ from django import forms
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
-from .models import Label, Comment
+from .models import Comment, Label
 
 
 class LabelForm(forms.ModelForm):

@@ -1,7 +1,9 @@
+from user.forms import LoginForm, UserForm
+
 from mezzanine.pages.page_processors import processor_for
 
 from label.forms import LabelForm
-from label.models import Category, Label, Image
+from label.models import Category, Label
 
 
 @processor_for('/')
@@ -10,6 +12,8 @@ def index(request, page):
     Отображает главную страницу.
     Контекст:
     form_label (form): Форма для отправки меток с карты на сайт
+    form_user (form): Форма для регистрации пользователей
+    login_form (form): Форма для авторизации пользователей
     body_class (str): Глобальный класс css для всей страницы
     """
     try:
@@ -28,14 +32,12 @@ def index(request, page):
                 'label': label
             })
 
-    pass
     return {
         'form_label': LabelForm(),
+        'form_user': UserForm(),
+        'login_form': LoginForm(),
         'body_class': 'page-index',
         'categories': Category.objects.all(),
         'balloon': balloon,
         'label_gallery': images
     }
-
-
-

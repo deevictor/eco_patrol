@@ -1,4 +1,5 @@
 from mezzanine.pages.page_processors import processor_for
+
 from .forms import FeedbackForm
 
 
@@ -23,5 +24,3 @@ def contacts(request, page):
         'form': form,
         'flag': flag
     }
-
-

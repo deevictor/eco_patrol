@@ -1,0 +1,64 @@
+<!--Modal-->
+{% load staticfiles %}
+<div id="modal-register" class="modal fade" role="dialog" data-backdrop="false">
+    <div class="modal-dialog">
+        <!--Modal content -->
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4 modal-content">
+                        <div class="modal-header">
+                            <section class="page-title">
+                                <h1>Регистрация</h1>
+                            </section>
+                            <button type="button" class="close" data-dismiss="modal" area-label="Close">
+                                <span aria-hidden="false">&times;</span>
+                            </button>
+                        </div>
+                        <!--end page-title-->
+                        <section>
+                            <form action="{% url 'user:register' %}" method="post" id="register_form" class="user_form" enctype="multipart/form-data" novalidate>{% csrf_token %}
+                                {{ form_user.errors }}
+                                <div class="row">
+                                    <div class="modal-body">
+                                    {% for field in form_user %}
+                                        {% if field.name != 'agree' %}
+                                            <div class="">
+                                                {{ field }}
+                                                {% if field.help_text %}
+                                                    <span style="color: grey">{{ field.help_text|safe }}</span>
+                                                {% endif %}
+                                                {% for error in field.errors %}
+                                                    <span class="text-danger">{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group center modal-footer">
+                                    <div class="row">
+                                        <div>
+                                        {{ form_user.agree }}
+                                            <label for="agree" class="form__label feedback-consent__label">
+                                                Я согласен на <a href="{% static 'attachments/agreement.pdf' %}" target="_blank" class="contact-emphasized">обработку персональных данных</a>
+                                            </label>
+
+                                            <span class="text-danger">{{ form_user.agree.errors.as_text }}</span>
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary center-block">Зарегестрироваться</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </section>
+                    </div>
+                    <!--col-md-4-->
+                </div>
+                <!--end ro-->
+            </div>
+            <!--end container-->
+        </div>
+</div>

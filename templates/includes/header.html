@@ -3,11 +3,11 @@
 <header id="page-header">
     <nav>
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-2 col-xs-4">
                 <a href="/" class="brand"><img src="{% static 'img/logo.jpg' %}" alt="" height="30"></a>
             </div>
 
-            <div class="col-sm-7 logopic">
+            <div class="col-sm-7  logopic">
                 <div class="row">
                     <div class="col-sm-3">
                         <a href="https://www.khabarovskadm.ru/ ">
@@ -31,16 +31,30 @@
 
 
 
-            <div class="col-sm-3">
-                <div class="primary-nav has-mega-menu pull-right">
-                    {% page_menu "pages/menus/dropdown.html" %}
-                </div>
-                <div class="nav-btn">
-                    <i></i>
-                    <i></i>
-                    <i></i>
+            <div class="col-sm-3 col-xs-8 clearfix">
+                <div class="pull-right">
+                    <div class="primary-nav has-mega-menu">
+                        {% page_menu "pages/menus/dropdown.html" %}
+                    </div>
+                    <div class="secondary-nav">
+                        {% if user.is_authenticated %}
+                            {{ user.username }}
+                            <a href="{% url 'logout' %}">logout</a>
+                        {% else %}
+                            <a href="#" data-toggle="modal" data-target="#modal-sign-in">Вход</a>
+                            {% include "user/login_form.html" %}
+                            <a href="#" class="promoted" data-toggle="modal" data-target="#modal-register">Регистрация</a>
+                            {% include "user/register_form.html" %}
+                        {% endif %}
+                    </div>
+                    <div class="nav-btn">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 </header>
+
