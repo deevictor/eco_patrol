@@ -31,10 +31,10 @@ $.ajaxSetup({
 });
 
 
-$(document).on('submit', '#ajax_form', function (e) {
+$(document).on('submit', '#label_form', function (e) {
     e.preventDefault();
-    var data = new FormData($('form').get(0));
-    $('#ajax_form').find("span.text-danger").html("");
+    var data = new FormData(this);
+    $(this).find("span.text-danger").html("");
     $.ajax({
         type: $(this).attr('method'),
         url: $(this).attr('action'),
@@ -46,12 +46,40 @@ $(document).on('submit', '#ajax_form', function (e) {
             if (data.errors === true) {
                 var errors = data.data;
                 Object.keys(errors).forEach(function (key) {
-                    var selector = "input[name=" + key + "] + span.text-danger"
-                    $('#ajax_form').find(selector).html(errors[key])
+                    var selector = "input[name=" + key + "]";
+                    $(selector).siblings('span').html(errors[key])
                 })
             } else if (data.errors === false) {
                 $(".label-wrapper").css("width", "0");
-                $('#ajax_form').trigger("reset");
+                $(this).trigger("reset");
+            }
+        },
+        error: function (data) {
+        },
+    });
+    return false;
+});
+
+$(document).on('submit', '.user_form', function (e) {
+    e.preventDefault();
+    var data = new FormData(this);
+    $(this).find("span.text-danger").html("");
+    $.ajax({
+        type: $(this).attr('method'),
+        url: $(this).attr('action'),
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data, textStatus, jqXHR) {
+            if (data.errors === true) {
+                var errors = data.data;
+                Object.keys(errors).forEach(function (key) {
+                    var selector = "input[name=" + key + "]";
+                    $(selector).siblings('span').html(errors[key])
+                })
+            } else if (data.errors === false) {
+                $(location).attr('href', data.url)
             }
         },
         error: function (data) {
@@ -63,11 +91,11 @@ $(document).on('submit', '#ajax_form', function (e) {
 $(document).on('submit', '.ajax_comment', function (e) {
     e.preventDefault();
     var data = new FormData($(this).get(0));
-    $('#ajax_form').find("span.text-danger").html("");
+    $('#label_form').find("span.text-danger").html("");
     $.ajax({
         type: $(this).attr('method'),
         url: $(this).attr('action'),
-        data: data, //$(this).serialize(),
+        data: data,
         cache: false,
         contentType: false,
         processData: false,
@@ -76,7 +104,7 @@ $(document).on('submit', '.ajax_comment', function (e) {
                 var errors = data.data;
                 Object.keys(errors).forEach(function (key) {
                     var selector = "input[name=" + key + "] + span.text-danger";
-                    $('#ajax_form').find(selector).html(errors[key])
+                    $('#label_form').find(selector).html(errors[key])
                 })
             } else if (data.errors === false) {
                 var form = $(e.target)
@@ -84,8 +112,6 @@ $(document).on('submit', '.ajax_comment', function (e) {
                 form.hide();
                 form.parent().parent().find(".add-button").show();
             }
-        },
-        error: function (data) {
         },
     });
     return false;
