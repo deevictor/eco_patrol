@@ -242,7 +242,7 @@ function init() {
                 if ($(document).width() > PAGE_WIDTH) {
                     $(".label-wrapper").css("width", "90%");
                 } else {
-                    $(".label-wrapper").css("width", "80%");
+                    $(".label-wrapper").css("width", "100%");
                 }
 
                 var myPlacemark = new ymaps.Placemark(myMap.balloon.getPosition(), {
@@ -355,14 +355,7 @@ function init() {
      }
     });
     myMap.controls.add(searchControl);
-}
 
-/*
-* Справочник (пока нужен)
-* https://tech.yandex.ru/maps/doc/jsapi/2.1/dg/concepts/many-objects-docpage/
-* https://tech.yandex.ru/maps/jsbox/2.1/object_manager
-* https://tech.yandex.ru/maps/doc/jsapi/2.1/dg/concepts/hotspots/about-hotspots-docpage/
-* https://habr.com/company/yandex/blog/243665/
-* https://ru.stackoverflow.com/questions/144349/yandex-map-%D0%9A%D0%B0%D0%BA-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B0%D1%82%D1%8C-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B-%D0%BA%D0%BE%D0%B3%D0%B4%D0%B0-%D0%B4%D0%B2%D0%B8%D0%B3%D0%B0%D0%B5%D1%88%D1%8C-%D0%BA%D0%B0%D1%80%D1%82%D1%83
-* https://ru.stackoverflow.com/questions/262472/%D0%A3%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%82%D0%B0%D1%80%D1%8B%D1%85-%D0%BC%D0%B5%D1%82%D0%BE%D0%BA-%D0%BD%D0%B0-%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81-%D0%9A%D0%B0%D1%80%D1%82%D1%8B
-* */
+    $(".iCheck-helper").css("z-index", "1")
+
+}
