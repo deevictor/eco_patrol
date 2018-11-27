@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 
 from apps.base.mixins import AdminYMapMixin
 
-from .models import Category, Image, Label, Comment
+from .models import Category, Comment, Image, Label
 
 
 class CategoryAdmin(admin.ModelAdmin):

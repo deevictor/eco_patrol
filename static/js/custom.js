@@ -887,3 +887,7 @@ $("[data-show-after-scroll]").each(function() {
         }
     });
 });
+
+$('#id_city').kladr({
+    type: $.kladr.type.city
+});

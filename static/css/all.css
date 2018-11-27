@@ -241,14 +241,4 @@
     line-height: 20px;
 }
 
-
-
-/*.icheckbox input[type="checkbox"] {*/
-  /*!* add these *!*/
-  /*position: absolute;*/
-  /*top: 0;*/
-  /*left: 0;*/
-  /*width: 16px;*/
-  /*height: 16px;*/
-  /*margin: 0;*/
-/*}*/
+.iCheck-helper {z-index: 1 !important}

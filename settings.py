@@ -132,7 +132,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'wsgi.application'
 
-AUTH_USER_MODEL = 'user.User'
+ACCOUNTS_PROFILE_MODEL = "user.Profile"
+ACCOUNTS_PROFILE_FORM_CLASS = "user.forms.ProfileForm"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -289,11 +290,5 @@ except ImportError:
 else:
     set_dynamic_settings(globals())
 
-EMAIL_USE_TLS = True
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'khabarovsk'
-EMAIL_HOST_PASSWORD = 'khabarovsk123'
-SERVER_EMAIL = 'deevictor.test@gmail.com'
