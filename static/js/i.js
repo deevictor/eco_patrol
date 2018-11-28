@@ -76,8 +76,9 @@ $(document).on('submit', '.user_form', function (e) {
                 var errors = data.data;
                 Object.keys(errors).forEach(function (key) {
                     var selector = "input[name=" + key + "]";
-                    $(selector).siblings('span').html(errors[key])
-                })
+                    $(selector).siblings('span').text(errors[key])
+                });
+                $('#form_errors').html(data.message);
             } else if (data.errors === false) {
                 $(location).attr('href', data.url)
             }

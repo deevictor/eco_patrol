@@ -32,7 +32,7 @@ class LabelForm(forms.ModelForm):
         widgets = {
             'about': forms.TextInput(attrs={
                 'placeholder': 'Местоположение',
-                'class': 'form-control'
+                'class': 'form-control font-color-white'
             }),
             'category': forms.Select(attrs={
                 'class': 'form-control selectpicker'

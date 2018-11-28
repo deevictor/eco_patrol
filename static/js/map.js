@@ -356,6 +356,4 @@ function init() {
     });
     myMap.controls.add(searchControl);
 
-    $(".iCheck-helper").css("z-index", "1")
-
 }

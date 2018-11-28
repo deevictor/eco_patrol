@@ -1,5 +1,3 @@
-from user.forms import LoginForm, UserForm
-
 from mezzanine.pages.page_processors import processor_for
 
 from label.forms import LabelForm
@@ -34,8 +32,6 @@ def index(request, page):
 
     return {
         'form_label': LabelForm(),
-        'form_user': UserForm(),
-        'login_form': LoginForm(),
         'body_class': 'page-index',
         'categories': Category.objects.all(),
         'balloon': balloon,

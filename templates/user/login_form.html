@@ -21,18 +21,18 @@
                                 {{ login_form.errors }}
                                 <div class="row">
                                     <div class="modal-body">
-                                    {% for field in login_form %}
-                                        <div class="">
-                                            {{ field }}
-                                            {% if field.help_text %}
-                                                <span style="color: grey">{{ field.help_text|safe }}</span>
-                                            {% endif %}
-                                            {% for error in field.errors %}
-                                                <span class="text-danger">{{ error }}</span>
-                                            {% endfor %}
-{#                                                <span class="text-danger">{{ field.errors.as_text }}</span>#}
-                                        </div>
-                                    {% endfor %}
+                                        {% for field in login_form %}
+                                            <div class="">
+                                                {{ field }}
+                                                {% if field.help_text %}
+                                                    <span style="color: grey">{{ field.help_text|safe }}</span>
+                                                {% endif %}
+                                                {% for error in field.errors %}
+                                                    <span class="text-danger">{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        {% endfor %}
+                                        <span class="text-danger" id="form_errors"></span>
                                     </div>
                                 </div>
                                 <div class="form-group center modal-footer">

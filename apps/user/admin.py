@@ -2,8 +2,6 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from mezzanine.accounts.admin import UserProfileAdmin
 
-from .models import User
-
 
 class UserAdmin(UserProfileAdmin):
     """Админка пользователя."""
@@ -24,7 +22,3 @@ class UserAdmin(UserProfileAdmin):
         }),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
-
-
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
