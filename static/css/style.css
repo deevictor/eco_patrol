@@ -8858,6 +8858,7 @@ input[type="date"]::-webkit-input-placeholder {
     padding: 12px;
     font-size: 14px;
     position: relative;
+    text-indent: 10px;
 }
 
 /* line 21, ../scss/helpers/_mixin.scss */
@@ -9578,6 +9579,7 @@ form .status i {
     padding-right: 0;
     color: #fff;
     margin-bottom: 10px;
+    text-indent: 10px;
 }
 
 /* line 306, ../scss/helpers/_forms.scss */
@@ -9663,7 +9665,6 @@ form .status i {
     background-color: transparent;
     border: none;
     border-bottom: 2px solid rgba(0, 0, 0, 0.08);
-    color: inherit;
     padding-left: 0 !important;
     outline: none !important;
 }
@@ -10632,7 +10633,7 @@ body::before {
 
 /* line 43, ../scss/helpers/_i.scss */
 .error {
-    color: #ed2a21;
+    color: #fff;
 }
 
 /* line 47, ../scss/helpers/_i.scss */
