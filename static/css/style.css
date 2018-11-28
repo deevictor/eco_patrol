@@ -3405,6 +3405,7 @@ section:not(.block) h2 {
 /* line 82, ../scss/helpers/_universal-classes.scss */
 .font-color-white {
     color: #fff;
+
 }
 
 /* line 83, ../scss/helpers/_universal-classes.scss */
@@ -8596,7 +8597,7 @@ input[type="date"]::-webkit-input-placeholder {
 
 /* line 75, ../scss/helpers/_forms.scss */
 .form-control {
-    background-color: #22a213;
+    background-color: #1c940e;
     height: auto;
 }
 
@@ -8616,6 +8617,7 @@ input[type="date"]::-webkit-input-placeholder {
     position: relative;
     width: 20px;
     top: -1px;
+    float: left;
 }
 
 /* line 78, ../scss/helpers/_forms.scss */
@@ -9569,11 +9571,13 @@ form .status i {
     -webkit-border-radius: 0px;
     border-radius: 0px;
     -webkit-appearance: none;
-    background-color: #22a213;
+    background-color: #1c940e;
     border: none;
     border-bottom: 2px solid rgba(0, 0, 0, 0.08);
     padding-left: 0;
     padding-right: 0;
+    color: #fff;
+    margin-bottom: 10px;
 }
 
 /* line 306, ../scss/helpers/_forms.scss */
@@ -9680,7 +9684,7 @@ form .status i {
 
 /* line 321, ../scss/helpers/_forms.scss */
 .form.inputs-underline .bootstrap-select > .dropdown-toggle.bs-placeholder, .input-group.inputs-underline .bootstrap-select > .dropdown-toggle.bs-placeholder {
-    color: rgba(0, 0, 0, 0.3);
+    color: #fff;
 }
 
 /* line 323, ../scss/helpers/_forms.scss */
@@ -10580,7 +10584,7 @@ body::before {
     z-index: 1000;
     padding-top: 25px;
     overflow-y: hidden;
-    background-color: #1c940e;
+    background-color: #22a213;
 }
 
 /* line 11, ../scss/helpers/_i.scss */
@@ -10905,9 +10909,30 @@ input[type="file"] + label {
     font-size: 1.25em;
     font-weight: 700;
     color: white;
-    background-color: #22a213;
+    background-color: #1c940e;
     display: inline-block;
     padding: 10px;
     cursor: pointer;
 }
 
+.iCheck-helper {
+    z-index: 1;
+}
+
+legend {
+    color: #1a7c00;
+}
+
+.btn-xlarge {
+    padding: 18px 28px;
+    margin-bottom: 20px;
+    font-size: 22px; //change this to your desired size
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+}
+
+input#id_about::placeholder, input#id_name::placeholder, input#id_email::placeholder, input#id_phone::placeholder, textarea#id_description::placeholder {
+    color: #fff
+}

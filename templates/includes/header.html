@@ -4,47 +4,21 @@
     <nav>
         <div class="row">
             <div class="col-sm-2 col-xs-4">
-                <a href="/" class="brand"><img src="{% static 'img/logo.jpg' %}" alt="" height="30"></a>
+                <a href="/" class="brand"><img src="{% static 'img/logo-0.png' %}" alt="" height="30"></a>
             </div>
 
-            <div class="col-sm-7  logopic">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <a href="https://www.khabarovskadm.ru/ ">
-                            <img src="{% static 'img/hb.jpg' %}" alt="">
-                        </a>
-
-                    </div>
-
-                    <div class="col-sm-3">
-                        <a href="http://gkhkontrol.ru/regions/dfo/khabarovski-krai">
-                            <img src="{% static 'img/jkh.jpg' %}" alt="">
-                        </a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="http://gkh27.ru/">
-                            <img src="{% static 'img/hk.jpg' %}" alt="">
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-sm-3 col-xs-8 clearfix">
+            <div class="col-sm-10 col-xs-8 clearfix">
                 <div class="pull-right">
                     <div class="primary-nav has-mega-menu">
                         {% page_menu "pages/menus/dropdown.html" %}
                     </div>
                     <div class="secondary-nav">
                         {% if user.is_authenticated %}
-                            {{ user.username }}
+                            <a href="{% url 'profile_update' %}">{{ user.username }}</a>
                             <a href="{% url 'logout' %}">logout</a>
                         {% else %}
-                            <a href="#" data-toggle="modal" data-target="#modal-sign-in">Вход</a>
-                            {% include "user/login_form.html" %}
-                            <a href="#" class="promoted" data-toggle="modal" data-target="#modal-register">Регистрация</a>
-                            {% include "user/register_form.html" %}
+                            <a href="{% url 'login' %}">Вход</a>
+                            <a href="{%  url 'signup' %}" class="promoted">Регистрация</a>
                         {% endif %}
                     </div>
                     <div class="nav-btn">

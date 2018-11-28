@@ -1,10 +1,12 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.db import models
 
 
-class User(AbstractUser):
+class Profile(models.Model):
     """Расширенная модель пользователя."""
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     phone = models.CharField(
         max_length=64,
@@ -30,6 +32,3 @@ class User(AbstractUser):
         blank=True,
         null=True
     )
-
-    def __str__(self):
-        return self.username
