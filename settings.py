@@ -132,8 +132,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'wsgi.application'
 
-ACCOUNTS_PROFILE_MODEL = "user.Profile"
-ACCOUNTS_PROFILE_FORM_CLASS = "user.forms.ProfileForm"
+AUTH_USER_MODEL = 'user.User'
+ACCOUNTS_PROFILE_FORM_CLASS = "user.forms.UserRegisterForm"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
