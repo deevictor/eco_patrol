@@ -9,12 +9,10 @@ except KeyError:
     sys.stderr.write('Error: virtualenv does not activated.\n')
     sys.exit(1)
 
-
 VAR_ROOT = os.path.join(virtualenv_root, 'var')
 
 if not os.path.exists(VAR_ROOT):
     os.mkdir(VAR_ROOT)
-
 
 # If True, the django-modeltranslation will be added to the
 # INSTALLED_APPS setting.
@@ -56,7 +54,6 @@ STATICFILES_DIRS = (
 
 ROOT_URLCONF = 'urls'
 
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -78,6 +75,7 @@ INSTALLED_APPS = [
     'base',
     'label',
     'user',
+    'about',
 ]
 
 MIDDLEWARE = [
@@ -97,6 +95,8 @@ MIDDLEWARE = [
     'mezzanine.core.middleware.SitePermissionMiddleware',
     'mezzanine.pages.middleware.PageMiddleware',
     'mezzanine.core.middleware.FetchFromCacheMiddleware',
+
+    'about.middleware.AboutPicsMiddleware'
 ]
 
 TEMPLATES = [
@@ -154,7 +154,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 TIME_ZONE = 'Asia/Vladivostok'
 
 LANGUAGE_CODE = 'ru'
@@ -169,11 +168,9 @@ USE_TZ = False
 
 SLUGIFY = 'pytils.translit.slugify'
 
-
 # Это название сайта в админке, отображающееся
 # в шапке админки и в форме логирования
 GRAPPELLI_ADMIN_TITLE = 'Конструктор городской среды'
-
 
 # Whether a user's session cookie expires when the Web browser is closed.
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -238,13 +235,11 @@ RICHTEXT_ALLOWED_ATTRIBUTES = (
     'type', 'usemap', 'valign', 'value', 'vspace', 'width', 'xml:lang'
 )
 
-
 TINYMCE_DEFAULT_CONFIG = {
     'theme': "advanced",
     'relative_urls': False,
     'language': 'ru',
 }
-
 
 DASHBOARD_TAGS = (
     ("mezzanine_tags.app_list",),
@@ -273,13 +268,11 @@ ADMIN_MENU_ORDER = (
     )),
 )
 
-
 PAGE_MENU_TEMPLATES = (
     (1, u'Главное меню', 'pages/menus/header_menu.html'),
 )
 
 BLOG_SLUG = "news"
-
 
 MAX_UPLOAD_SIZE = 52428800
 
