@@ -16,7 +16,11 @@
                     <div class="secondary-nav">
                         {% if user.is_authenticated %}
                             <a href="{% url 'profile_update' %}">{{ user.username }}</a>
-                            <a href="{% url 'logout' %}">logout</a>
+                            {% if user.is_inspector %}
+                                <img src="{% static 'img/inspector.png' %}" alt="" height="13" width="13"
+                                     title="Инспектор">
+                            {% endif %}
+                            <a href="{% url 'logout' %}">Выход</a>
                         {% else %}
                             <a href="{% url 'login' %}">Вход</a>
                             <a href="{% url 'signup' %}" class="promoted">Регистрация</a>

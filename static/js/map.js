@@ -2,7 +2,8 @@ ymaps.ready(init);
 var myMap;
 var objectManager;
 PAGE_WIDTH = 768;
- //взял  ширину страницы 768 px как за границу между .col-md (medium devices) и col-sm (small devices)
+
+//взял  ширину страницы 768 px как за границу между .col-md (medium devices) и col-sm (small devices)
 
 function init() {
     // При возникновении событий, изменяющих состояние карты,
@@ -62,7 +63,9 @@ function init() {
             build: function () {
                 this.constructor.superclass.build.call(this);
                 this._$element = $('.balloon', this.getParentElement());
-                setTimeout(()=>{this._$element.css({right: '10px'})}, 100);
+                setTimeout(() => {
+                    this._$element.css({right: '10px'})
+                }, 100);
                 this._$element.find('.label-wrapper-close')
                     .on('click', $.proxy(this.onCloseClick, this));
             },
@@ -71,7 +74,7 @@ function init() {
                 this.events.fire('userclose');
             },
             clear: function () {
-                this._$element.css({right: '-350px'})
+                this._$element.css({right: '-350px'});
                 this._$element.find('.close').off('click');
                 this.constructor.superclass.clear.call(this);
             },
@@ -79,22 +82,22 @@ function init() {
     );
 
     var BalloonContentLayout = ymaps.templateLayoutFactory.createClass(
-       '$[properties.balloonContentBody]',
+        '$[properties.balloonContentBody]',
         {
             build: function () {
                 this.constructor.superclass.build.call(this);
                 var parent = this.getParentElement();
                 var share = $('.share-link', parent);
-                share.popover().click(function(){
+                share.popover().click(function () {
                     $('.copy-url', parent).val(window.location.href).select();
                     document.execCommand("copy");
-                }).on('shown.bs.popover', function(){
-                    $('.copy-url', parent).on('blur', function(){
+                }).on('shown.bs.popover', function () {
+                    $('.copy-url', parent).on('blur', function () {
                         share.popover('hide');
                     });
                 });
                 var commentsWrapper = $(".comments-wrapper", parent);
-                var form  = commentsWrapper.find("form");
+                var form = commentsWrapper.find("form");
                 var addButton = commentsWrapper.find("button.add-button");
                 var cancelButton = commentsWrapper.find("button[type='reset']");
                 form.hide();
@@ -181,7 +184,7 @@ function init() {
                 hashCenter = getParam('center'),
                 hashZoom = getParam('zoom'),
                 open = getParam('open');
-            if(balloon_id){
+            if (balloon_id) {
                 objectManager.objects.balloon.open(balloon_id, {
                     balloonPanelMaxMapArea: 'Infinity'
                 });
@@ -240,9 +243,9 @@ function init() {
             },
             onLabelClick: function () {
                 if ($(document).width() > PAGE_WIDTH) {
-                    $(".label-wrapper").css("width", "90%");
+                    $(".label-wrapper").css("width", "70%");
                 } else {
-                    $(".label-wrapper").css("width", "100%");
+                    $(".label-wrapper").css("width", "80%");
                 }
 
                 var myPlacemark = new ymaps.Placemark(myMap.balloon.getPosition(), {
@@ -260,27 +263,29 @@ function init() {
             }
         });
 
-    myMap.events.add('click', function (e) {
-        var coords = e.get('coords');
-        if (!myMap.balloon.isOpen()) {
-            myCollection.removeAll();
-            $("#id_point").val(coords);
-            $(".label-wrapper").css("width", "0");
-            myMap.balloon.open(coords, {
-                name: "single balloon"
-            }, {
-                layout: BalloonContentLayout
+    if (user_auth === 'true')
+        if (is_inspector === 'true')
+            myMap.events.add('click', function (e) {
+                var coords = e.get('coords');
+                if (!myMap.balloon.isOpen()) {
+                    myCollection.removeAll();
+                    $("#id_point").val(coords);
+                    $(".label-wrapper").css("width", "0");
+                    myMap.balloon.open(coords, {
+                        name: "single balloon"
+                    }, {
+                        layout: BalloonContentLayout
+                    });
+                } else {
+                    myMap.balloon.close();
+                    // myPlacemark.remove();
+                    // myCollection.remove();
+                    myCollection.removeAll();
+                    myMap.balloon.close();
+                    $(".label-wrapper").css("width", "0");
+                }
             });
-        }
-        else {
-            myMap.balloon.close();
-            // myPlacemark.remove();
-            // myCollection.remove();
-            myCollection.removeAll();
-            myMap.balloon.close();
-            $(".label-wrapper").css("width", "0");
-        }
-    });
+
 
     $('#addMarker').bind('click', addMarkers);
 
@@ -290,15 +295,12 @@ function init() {
             newPlacemarks = createGeoObjects(bounds);
     }
 
-    $(".label-wrapper-close").on('click', function (e) {
-        e.preventDefault();
-        $(".label-wrapper").css("width", "0");
-        myCollection.removeAll();
-    })
 
 
+
+    category.push('Мои метки');
     var listBoxItems = category
-            .map(function(title) {
+            .map(function (title) {
                 return new ymaps.control.ListBoxItem({
                     data: {
                         content: title
@@ -308,26 +310,26 @@ function init() {
                     },
                 })
             }),
-            // Теперь создадим список, содержащий 5 пунктов.
-            listBoxControl = new ymaps.control.ListBox({
-                data: {
-                    content: 'Тип метки',
-                    title: 'Тип метки'
-                },
-                items: listBoxItems,
-                state: {
-                    // Признак, развернут ли список.
-                    expanded: false,
-                    filters: listBoxItems.reduce(function(filters, filter) {
-                        filters[filter.data.get('content')] = filter.isSelected();
-                        return filters;
-                    }, {})
-                }
-            });
+        // Теперь создадим список, содержащий 5 пунктов.
+        listBoxControl = new ymaps.control.ListBox({
+            data: {
+                content: 'Тип метки',
+                title: 'Тип метки'
+            },
+            items: listBoxItems,
+            state: {
+                // Признак, развернут ли список.
+                expanded: false,
+                filters: listBoxItems.reduce(function (filters, filter) {
+                    filters[filter.data.get('content')] = filter.isSelected();
+                    return filters;
+                }, {})
+            }
+        });
     myMap.controls.add(listBoxControl);
 
     // Добавим отслеживание изменения признака, выбран ли пункт списка.
-    listBoxControl.events.add(['select', 'deselect'], function(e) {
+    listBoxControl.events.add(['select', 'deselect'], function (e) {
         var listBoxItem = e.get('target');
         var filters = ymaps.util.extend({}, listBoxControl.state.get('filters'));
         filters[listBoxItem.data.get('content')] = listBoxItem.isSelected();
@@ -335,24 +337,53 @@ function init() {
     });
 
     var filterMonitor = new ymaps.Monitor(listBoxControl.state);
-    filterMonitor.add('filters', function(filters) {
+    filterMonitor.add('filters', function (filters) {
         // Применим фильтр.
-        objectManager.setFilter(getFilterFunction(filters));
+        var nameFilter = [];
+        var categoryFilters = [];
+
+        //Немного закостылил так как не понимаю как адэкватно сделать
+
+        if(filters['Мои метки'])
+        {
+            nameFilter[usernamejs] = true;
+            delete filters['Мои метки'];
+            categoryFilter = filters;
+            objectManager.setFilter(getFilterFunction(categoryFilter));
+            objectManager.setFilter(getFilterByName(nameFilter));
+        }
+        else
+        {
+            nameFilter[usernamejs] = false;
+            delete filters['Мои метки'];
+            categoryFilter = filters;
+            objectManager.setFilter(getFilterByName(nameFilter));
+            objectManager.setFilter(getFilterFunction(categoryFilter));
+        }
+
     });
 
-    function getFilterFunction(categories){
-        return function(obj){
+    function getFilterFunction(categories) {
+        return function (obj) {
             var content = obj.properties.category;
             return categories[content]
         }
     }
 
+    function getFilterByName(categories){
+        return function(obj){
+            var content = obj.properties.name;
+            return categories[content]
+        }
+    }
+
+
     var searchControl = new ymaps.control.SearchControl({
-     options: {
-         float: 'right',
-         floatIndex: 0,
-         noPlacemark: true
-     }
+        options: {
+            float: 'right',
+            floatIndex: 0,
+            noPlacemark: true
+        }
     });
     myMap.controls.add(searchControl);
 

@@ -18,6 +18,7 @@ class LabelForm(forms.ModelForm):
 
     :model:
     """
+
     def __init__(self, *args, **kwargs):
         super(LabelForm, self).__init__(*args, **kwargs)
         self.fields['category'].empty_label = 'Категория метки'
@@ -35,7 +36,8 @@ class LabelForm(forms.ModelForm):
                 'class': 'form-control font-color-white'
             }),
             'category': forms.Select(attrs={
-                'class': 'form-control selectpicker'
+                'id': 'categorySelect',
+                'class': 'form-control',
             }),
             'name': forms.TextInput(attrs={
                 'placeholder': 'Имя',
@@ -57,7 +59,7 @@ class LabelForm(forms.ModelForm):
             'point': forms.HiddenInput(),
             'attach': forms.ClearableFileInput(attrs={
                 'id': 'file',
-                'multiple': True
+                'multiple': 'multiple'
             }),
         }
 
