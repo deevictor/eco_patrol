@@ -1,7 +1,8 @@
-from django.conf.global_settings import *  # @UnusedWildImport
 import importlib
 import os
 import sys
+
+from django.conf.global_settings import *  # @UnusedWildImport
 
 try:
     virtualenv_root = os.environ['VIRTUAL_ENV']
@@ -75,7 +76,7 @@ INSTALLED_APPS = [
     'base',
     'label',
     'user',
-    'pics',
+    'about',
 ]
 
 MIDDLEWARE = [
@@ -96,7 +97,7 @@ MIDDLEWARE = [
     'mezzanine.pages.middleware.PageMiddleware',
     'mezzanine.core.middleware.FetchFromCacheMiddleware',
 
-    'pics.middleware.PicsMiddleware'
+    'about.middleware.AboutMiddleware'
 ]
 
 TEMPLATES = [
@@ -115,8 +116,10 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.template.context_processors.request',
                 'django.template.context_processors.tz',
+                'about.context_processors.about_pics',
                 'mezzanine.conf.context_processors.settings',
                 'mezzanine.pages.context_processors.page',
+
             ],
             'builtins': [
                 'mezzanine.template.loader_tags',
@@ -285,3 +288,7 @@ else:
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
+
+# Название папки с картинками для вывода в карусели на странице /about/
+# папка должна находится в /static/
+ABOUT_PICS_FOLDER = 'img/about/'

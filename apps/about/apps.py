@@ -2,5 +2,5 @@
 from django.apps import AppConfig
 
 
-class PicsConfig(AppConfig):
-    name = 'pics'
+class AboutConfig(AppConfig):
+    name = 'about'
