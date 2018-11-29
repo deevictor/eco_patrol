@@ -6,8 +6,8 @@ from django.conf import settings
 
 class PicsMiddleware:
     """
-    Middleware добавляющий в request список картинок из папок указанных в
-    PICS_FOLDERS в settings. Все папки должны находится в "static/img"
+    Добавляет в request словарь названий папок со списками картинок в них
+
     """
 
     def __init__(self, get_response):
@@ -26,6 +26,7 @@ class PicsMiddleware:
 
         :return: Словарь вида 'название папки': ['имена файлов в папке']
         :rtype: dict
+
         """
         pics = {}
         extensions = ["*.png", "*.jpg", "*.jpeg", ]
