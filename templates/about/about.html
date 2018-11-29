@@ -50,7 +50,7 @@
              data-owl-loop="1" data-owl-auto-width="0" data-owl-nav="1"
              data-owl-dots="1"
              data-owl-nav-container="#gallery-nav">
-            {% for img in request.about_pics %}
+            {% for img in request.pics.about %}
                 <div class="item"
                      style="background-image: url('{% static '/img/about' %}/{{ img }}');">
                 </div>

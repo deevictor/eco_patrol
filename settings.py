@@ -75,7 +75,7 @@ INSTALLED_APPS = [
     'base',
     'label',
     'user',
-    'about',
+    'pics',
 ]
 
 MIDDLEWARE = [
@@ -96,7 +96,7 @@ MIDDLEWARE = [
     'mezzanine.pages.middleware.PageMiddleware',
     'mezzanine.core.middleware.FetchFromCacheMiddleware',
 
-    'about.middleware.AboutPicsMiddleware'
+    'pics.middleware.PicsMiddleware'
 ]
 
 TEMPLATES = [
