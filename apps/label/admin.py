@@ -35,7 +35,7 @@ class LabelAdmin(AdminYMapMixin, admin.ModelAdmin):
     """Отображает метки для карты."""
 
     list_display = (
-        'name', 'category', 'phone', 'name', 'pub_time', 'approved', 'in_top',
+        'name', 'category', 'phone', 'pub_time', 'approved', 'in_top',
         'solved'
     )
     list_editable = ('approved', 'in_top', 'solved')

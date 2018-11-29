@@ -263,26 +263,29 @@ function init() {
             }
         });
 
-    myMap.events.add('click', function (e) {
-        var coords = e.get('coords');
-        if (!myMap.balloon.isOpen()) {
-            myCollection.removeAll();
-            $("#id_point").val(coords);
-            $(".label-wrapper").css("width", "0");
-            myMap.balloon.open(coords, {
-                name: "single balloon"
-            }, {
-                layout: BalloonContentLayout
+    if (user_auth === 'true')
+        if (is_inspector === 'true')
+            myMap.events.add('click', function (e) {
+                var coords = e.get('coords');
+                if (!myMap.balloon.isOpen()) {
+                    myCollection.removeAll();
+                    $("#id_point").val(coords);
+                    $(".label-wrapper").css("width", "0");
+                    myMap.balloon.open(coords, {
+                        name: "single balloon"
+                    }, {
+                        layout: BalloonContentLayout
+                    });
+                } else {
+                    myMap.balloon.close();
+                    // myPlacemark.remove();
+                    // myCollection.remove();
+                    myCollection.removeAll();
+                    myMap.balloon.close();
+                    $(".label-wrapper").css("width", "0");
+                }
             });
-        } else {
-            myMap.balloon.close();
-            // myPlacemark.remove();
-            // myCollection.remove();
-            myCollection.removeAll();
-            myMap.balloon.close();
-            $(".label-wrapper").css("width", "0");
-        }
-    });
+
 
     $('#addMarker').bind('click', addMarkers);
 
@@ -295,6 +298,7 @@ function init() {
 
 
 
+    category.push('Мои метки');
     var listBoxItems = category
             .map(function (title) {
                 return new ymaps.control.ListBoxItem({
@@ -335,7 +339,28 @@ function init() {
     var filterMonitor = new ymaps.Monitor(listBoxControl.state);
     filterMonitor.add('filters', function (filters) {
         // Применим фильтр.
-        objectManager.setFilter(getFilterFunction(filters));
+        var nameFilter = [];
+        var categoryFilters = [];
+
+        //Немного закостылил так как не понимаю как адэкватно сделать
+
+        if(filters['Мои метки'])
+        {
+            nameFilter[usernamejs] = true;
+            delete filters['Мои метки'];
+            categoryFilter = filters;
+            objectManager.setFilter(getFilterFunction(categoryFilter));
+            objectManager.setFilter(getFilterByName(nameFilter));
+        }
+        else
+        {
+            nameFilter[usernamejs] = false;
+            delete filters['Мои метки'];
+            categoryFilter = filters;
+            objectManager.setFilter(getFilterByName(nameFilter));
+            objectManager.setFilter(getFilterFunction(categoryFilter));
+        }
+
     });
 
     function getFilterFunction(categories) {
@@ -344,6 +369,14 @@ function init() {
             return categories[content]
         }
     }
+
+    function getFilterByName(categories){
+        return function(obj){
+            var content = obj.properties.name;
+            return categories[content]
+        }
+    }
+
 
     var searchControl = new ymaps.control.SearchControl({
         options: {

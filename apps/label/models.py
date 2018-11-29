@@ -75,7 +75,7 @@ class Label(models.Model):
         unique=True
     )
     approved = models.BooleanField(
-        default=False,
+        default=True,
         verbose_name='Одобрено админом'
     )
     in_top = models.BooleanField(

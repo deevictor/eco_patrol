@@ -7,15 +7,17 @@
         <div class="col-md-8 col-sm-8">
             {% for field in form_label.visible_fields %}
                 {% if field.name != 'description' %}
-                    <div class="col-md-4 col-sm-6">
-                        {{ field }}
-                        {% if field.name == 'attach' %}
-                            <label for="file">{{ field.label }}</label>
-                            <span id="files_count"
-                                  style="margin-left: 10px; color: #fff;"></span>
-                        {% endif %}
-                        <span class="text-danger">{{ field.errors.as_text }}</span>
-                    </div>
+                    {% if field.name != 'name' %}
+                        <div class="col-md-4 col-sm-6">
+                            {{ field }}
+                            {% if field.name == 'attach' %}
+                                <label for="file">{{ field.label }}</label>
+                                <span id="files_count"
+                                      style="margin-left: 10px; color: #fff;"></span>
+                            {% endif %}
+                            <span class="text-danger">{{ field.errors.as_text }}</span>
+                        </div>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         </div>

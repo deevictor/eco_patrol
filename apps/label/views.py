@@ -86,7 +86,17 @@ def label_form(request):
     result = {'errors': False, 'data': {}, 'message': ''}
 
     if request.method == 'POST' and request.is_ajax():
-        form = LabelForm(request.POST, request.FILES)
+        # Автоматически пробрасываем юзернейм для определения метки
+
+        username = None
+
+        if request.user:
+            username = request.user.get_username()
+
+        data = {'name': username}
+        data.update(request.POST.dict())
+
+        form = LabelForm(data, request.FILES)
         if form.is_valid():
             instance = form.save()
             for img in request.FILES.getlist('attach'):
