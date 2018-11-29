@@ -10,7 +10,7 @@ admin.autodiscover()
 urlpatterns = [
     url('^admin/', include(admin.site.urls)),
     url('^label/', include('label.urls')),
-    url("^$", page, {"slug": "/"}, name="home"),
+    url('^$', page, {'slug': '/'}, name='home'),
     url('^', include('mezzanine.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

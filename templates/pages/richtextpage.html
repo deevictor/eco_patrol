@@ -3,18 +3,20 @@
 {% load mezzanine_tags %}
 
 {% block content %}
-<div class="row">
-<div class="col-md-9 col-sm-9">
-    <section class="page-title">
-        <h1>
-            <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
-        </h1>
-    </section>
-    <article class="blog-post">
-        {{ page.richtextpage.content|richtext_filters }}
-    </article>
-</div>
-</div>
+    {% ifequal page.get_absolute_url '/about/' %}
+        {% include 'about/about.html' %}
+    {% endifequal %}
+    <div class="row">
+        <div class="col-md-9 col-sm-9">
+            <section class="page-title">
+                <h1>
+                    <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+                </h1>
+            </section>
 
-
+            <article class="blog-post">
+                {{ page.richtextpage.content|richtext_filters }}
+            </article>
+        </div>
+    </div>
 {% endblock %}
