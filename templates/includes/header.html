@@ -4,7 +4,8 @@
     <nav>
         <div class="row">
             <div class="col-sm-2 col-xs-5">
-                <a href="/" class="brand"><img src="{% static 'img/logo-0.png' %}" alt="" height="30"></a>
+                <a href="/" class="brand"><img
+                        src="{% static 'img/logo-0.png' %}" alt="" height="30"></a>
             </div>
 
             <div class="col-sm-10 col-xs-7 clearfix">
@@ -18,7 +19,7 @@
                             <a href="{% url 'logout' %}">logout</a>
                         {% else %}
                             <a href="{% url 'login' %}">Вход</a>
-                            <a href="{%  url 'signup' %}" class="promoted">Регистрация</a>
+                            <a href="{% url 'signup' %}" class="promoted">Регистрация</a>
                         {% endif %}
                     </div>
                     <div class="nav-btn">
