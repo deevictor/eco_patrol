@@ -96,21 +96,21 @@ class Label(models.Model):
         verbose_name='Дата и время создания метки'
     )
 
-    def __str__(self):
-        return self.name
-
-    @property
-    def get_images(self):
-        return [i.image.url for i in self.image_set.all()]
-
     class Meta:
         verbose_name = 'Метка на карте'
         verbose_name_plural = 'Метки на карте'
+
+    def __str__(self):
+        return self.name
 
     def get_absolute_url(self):
         from django.contrib.sites.models import Site
         current_site = Site.objects.get_current().domain
         return "http://%s/?id_balloon=%s" % (current_site, self.id)
+
+    @property
+    def get_images(self):
+        return [i.image.url for i in self.image_set.all()]
 
 
 class Image(models.Model):

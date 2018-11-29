@@ -27,11 +27,9 @@ class NewsPostAdmin(BlogPostAdmin):
 
 admin.site.register(BlogPost, NewsPostAdmin)
 
-
 MODELS_TO_UNREGISTER = (
     ThreadedComment,
 )
-
 
 for model in MODELS_TO_UNREGISTER:
     try:

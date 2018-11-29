@@ -14,6 +14,7 @@ validate_color = RegexValidator(color_re, _('Enter a valid color.'), 'invalid')
 
 class ColorWidget(forms.Widget):
     """Виджет подключающий js и шаблон для выбора цвета."""
+
     class Media:
         if settings.DEBUG:
             js = ['/static/js/jscolor.js']

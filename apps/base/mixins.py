@@ -8,6 +8,7 @@ class AdminYMapMixin:
     """Подключаем скрипт Яндекс карт
     и свой js-файл из папки static/grappelli/map.js
     """
+
     class Media:
         js = [
             'https://api-maps.yandex.ru/2.1/?lang=ru_RU',

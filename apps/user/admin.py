@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from mezzanine.accounts.admin import UserProfileAdmin
+
 from .models import User
 
 
@@ -17,7 +18,8 @@ class UserAdmin(UserProfileAdmin):
         }),
         (_('Permissions'), {
             'fields': (
-                'is_inspector', 'is_active', 'is_staff', 'is_superuser', 'groups',
+                'is_inspector', 'is_active', 'is_staff', 'is_superuser',
+                'groups',
                 'user_permissions'
             )
         }),
@@ -25,7 +27,8 @@ class UserAdmin(UserProfileAdmin):
     )
 
     list_display = (
-        'username', 'first_name', 'last_name', 'is_inspector', 'is_active', 'is_staff',
+        'username', 'first_name', 'last_name', 'is_inspector', 'is_active',
+        'is_staff',
         'last_login', 'date_joined'
     )
 

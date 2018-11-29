@@ -9,9 +9,10 @@ class FeedbackForm(forms.ModelForm):
     пользователями
     Всем полям добавлен класс `form-control` для стилей Bootstrap
     """
+
     class Meta:
         model = Feedback
-        fields = ('name', 'description', )
+        fields = ('name', 'description',)
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
