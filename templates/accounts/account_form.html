@@ -6,26 +6,46 @@
 {% block body_id %}account{% endblock %}
 
 {% block breadcrumb_menu %}
-{{ block.super }}
-<li>{{ title }}</li>
+    {{ block.super }}
+    <li>{{ title }}</li>
 {% endblock %}
-
 {% block main %}
-    <div class="container">
-        <div class="row">
-            {% errors_for form %}
+    <div class="text-center">
+        <div class="container">
+            <div class="row" style="margin: 0 auto; width: 35%">
+                <br/>
+                <form class="form-signin" method="post"
+                        {% if form.is_multipart %}
+                      enctype="multipart/form-data"{% endif %}>
+                    <fieldset>
+                        <legend><h1>{{ title }}</h1></legend>
+                        {% errors_for form %}
+                        {% fields_for form %}
+                        <div class="form-actions">
+                            {% block account_form_actions %}
+                                <br/>
+                                <input class="btn btn-primary btn-xlarge center-block form-control"
+                                       type="submit" value="Войти">
+                            {% endblock %}
+                        </div>
+                    </fieldset>
+                </form>
+                {% if request.user.is_authenticated %}
+                    <p>Вы уже вошли. Если хотите войти под другим пользователем,
+                        вам нужно сначала выйти из текущего.</p>
+                {% else %}
+                    {% url "signup" as signup_url %}
+                    <p>Если вы не имеете аккаунта, вы можете
+                        <a href="{{ signup_url }}?next={{ next }}">зарегистрироваться</a>.
+                    </p>
+                    {% url "mezzanine_password_reset" as password_reset_url %}
+                    {% url "profile_update" as profile_update_url %}
+                    <p>Также вы можете <a
+                            href="{{ password_reset_url }}?next={{ profile_update_url }}">сбросить
+                        пароль</a> если вы забыли его.</p>
+                {% endif %}
 
-            <form method="post"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
-                <fieldset>
-                <legend><h1>{{ title }}</h1></legend>
-                {% fields_for form %}
-                <div class="form-actions">
-                    {% block account_form_actions %}
-                    <input class="btn btn-primary btn-xlarge center-block form-control" type="submit" value="{{ title }}">
-                    {% endblock %}
-                </div>
-                </fieldset>
-        </form>
-        </div> <!--end ro-->
-    </div> <!--end container-->
+            </div> <!--end ro-->
+        </div> <!--end container-->
+    </div>
 {% endblock %}
