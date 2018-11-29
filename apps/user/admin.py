@@ -17,12 +17,19 @@ class UserAdmin(UserProfileAdmin):
         }),
         (_('Permissions'), {
             'fields': (
-                'is_active', 'is_staff', 'is_superuser', 'groups',
+                'is_inspector', 'is_active', 'is_staff', 'is_superuser', 'groups',
                 'user_permissions'
             )
         }),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
+
+    list_display = (
+        'username', 'first_name', 'last_name', 'is_inspector', 'is_active', 'is_staff',
+        'last_login', 'date_joined'
+    )
+
+    list_editable = ('is_inspector',)
 
 
 admin.site.unregister(User)

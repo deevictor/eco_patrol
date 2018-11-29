@@ -20,6 +20,11 @@ class User(AbstractUser):
         max_length=64
     )
 
+    is_inspector = models.BooleanField(
+        'Статус инспектора',
+        default=False,
+    )
+
     middle_name = models.CharField(
         verbose_name='Отчество',
         validators=[RegexValidator(
