@@ -36,5 +36,19 @@ class User(AbstractUser):
         null=True
     )
 
+    registration = models.CharField(
+        verbose_name='Прописка',
+        max_length=128,
+        blank=True,
+        null=True
+    )
+
+    education = models.CharField(
+        verbose_name='Образование',
+        max_length=64,
+        blank=True,
+        null=True
+    )
+
     def __str__(self):
         return self.username
