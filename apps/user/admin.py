@@ -13,7 +13,7 @@ class UserAdmin(UserProfileAdmin):
         (_('Personal info'), {
             'fields': (
                 'first_name', 'last_name', 'middle_name', 'email', 'phone',
-                'city'
+                'city', 'registration', 'education'
             )
         }),
         (_('Permissions'), {
