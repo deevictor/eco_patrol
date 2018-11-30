@@ -87,7 +87,8 @@ def label_form(request):
         data (dict): данные формы
         message (str): описание ошибки
     """
-    result = {'errors': False, 'data': {}, 'message': ''}
+    success_message = 'Сообщение отправлено!'
+    failure_message = 'Исправьте ошибки формы!'
 
     if request.method == 'POST' and request.is_ajax():
         # Автоматически пробрасываем юзернейм для определения метки
@@ -101,23 +102,24 @@ def label_form(request):
         data.update(request.POST.dict())
 
         form = LabelForm(data, request.FILES)
+
         if form.is_valid():
-            instance = form.save()
-            for img in request.FILES.getlist('attach'):
-                i = Image(
-                    label=Label.objects.get(id=instance.id),
-                    image=img
-                )
-                i.save()
-            result['message'] = 'Сообщение отправлено!'
-        else:
-            result.update(
-                errors=True,
-                data=form.errors,
-                message='Исправьте ошибки формы!'
+            label = form.save()
+            images = request.FILES.getlist('images')
+            Image.objects.bulk_create(
+                Image(label=label, image=img) for img in images
             )
 
-    return JsonResponse(result)
+            response = JsonResponse({
+                'message': success_message
+            })
+        else:
+            response = JsonResponse({
+                'message': failure_message,
+                'errors': form.errors.as_text_by_key()
+            }, status=400)
+
+        return response
 
 
 def ajax_comment(request):

@@ -1,8 +1,13 @@
 <form action="{% url 'label:label_form' %}" method="post" id="label_form"
-      enctype="multipart/form-data" novalidate>
-    {% csrf_token %}
+      enctype="multipart/form-data" novalidate>{% csrf_token %}
     {{ form_label.errors }}
-    {% for hidden in form_label.hidden_fields %}{{ hidden }}{% endfor %}
+    {% for hidden in form_label.hidden_fields %}
+        <div class="form-group">
+            {{ hidden }}
+            <span class="text-danger">{{ field.errors.as_text }}</span>
+        </div>
+    {% endfor %}
+
     <div class="row">
         <div class="col-md-8 col-sm-8">
             {% for field in form_label.visible_fields %}
@@ -10,7 +15,7 @@
                     {% if field.name != 'name' %}
                         <div class="col-md-4 col-sm-6">
                             {{ field }}
-                            {% if field.name == 'attach' %}
+                            {% if field.name == 'images' %}
                                 <label for="file">{{ field.label }}</label>
                                 <span id="files_count"
                                       style="margin-left: 10px; color: #fff;"></span>
