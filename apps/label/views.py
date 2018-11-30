@@ -40,7 +40,7 @@ def labels_json(request):
             'about': label.about,
             'form_comment': CommentForm(initial={'label': label.id}),
             'comments': comments,
-            'decision': label.decision.url
+            'decision': label.decision_url
         })
 
         poly = {
@@ -60,7 +60,7 @@ def labels_json(request):
                 'name': label.name,
                 # текст при наведении мыши
                 'hintContent': f'<strong>{label.category.title}</strong>',
-                'decision': label.decision.url
+                'decision': label.decision_url
             },
             'options': {
                 'preset': f'islands#{icon_type}',
