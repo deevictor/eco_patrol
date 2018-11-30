@@ -1,15 +1,16 @@
 {% load i18n pages_tags %}
+{% load static %}
 
 {% spaceless %}
     {% if page_branch_in_menu %}
             {% if branch_level == 0 %}
                 <ul class="navigation">
                     {% for page in page_branch %}
-{#                        {% if not has_home and page.is_primary and forloop.first %}#}
-{#                            <li{% if on_home %} class="active"{% endif %} id="dropdown-menu-home">#}
-{#                                <a href="{% url "home" %}">{% trans "Home" %}</a>#}
-{#                            </li>#}
-{#                        {% endif %}#}
+                        {% if not has_home and page.is_primary and forloop.first %}
+                            <li{% if on_home %} class="active"{% endif %} id="dropdown-menu-home">
+                                <a href="{% url "home" %}">{% trans "Home" %}</a>
+                            </li>
+                        {% endif %}
                         {% if page.in_menu %}
                             <li class="{% if page.has_children_in_menu %}has-child{% endif %}
                {% if page.is_current_or_ascendant %}active{% endif %}" id="{{ page.html_id }}">
@@ -20,6 +21,19 @@
                             </li>
                         {% endif %}
                     {% endfor %}
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile_update' %}">{{ user.username }}
+                        {% if user.is_inspector %}
+                            <img src="{% static 'img/inspector.png' %}" alt="" height="13" width="13" title="Инспектор">
+                        {% endif %}</a></li>
+                        <li><a href="{% url 'logout' %}">Выход</a></li>
+                        {% if user.is_inspector == False %}
+                            <li><a href="{% url 'user:inspector_request' %}"><button type="button" class="btn btn-success">СТАТЬ ИНСПЕКТОРОМ</button></a></li>
+                        {% endif %}
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Вход</a></li>
+                        <li><a href="{%  url 'signup' %}">Регистрация</a></li>
+                    {% endif %}
                 </ul>
 
             {% else %}

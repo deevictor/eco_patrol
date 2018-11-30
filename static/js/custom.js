@@ -316,6 +316,26 @@ $(document).ready(function($) {
     bgTransfer();
     responsiveNavigation();
 
+// Inspector Form Ajax request
+
+    $("#inspector_form").on("submit", function(event){
+        event.preventDefault();
+        $.ajax({
+            type: $(this).attr('method'),
+            url: window.location.href,
+            dataType: 'json',
+            data: $(this).serialize(),
+            success: function(data){
+                if (data.status == false){
+                    console.log(data.message)
+                    console.log(data.errors)
+                } else if (data.status === true) {
+                    console.log(data.message)
+                }
+            }
+        })
+    });
+
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -890,4 +910,9 @@ $("[data-show-after-scroll]").each(function() {
 
 $('#id_city').kladr({
     type: $.kladr.type.city
+});
+
+
+$('.print_button').click(function(){
+    $('.for_printing').printThis();
 });

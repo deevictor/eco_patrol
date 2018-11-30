@@ -277,7 +277,8 @@ PAGE_MENU_TEMPLATES = (
 
 BLOG_SLUG = "news"
 
-MAX_UPLOAD_SIZE = 52428800
+MAX_UPLOAD_SIZE = 10485760
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760
 
 try:
     from mezzanine.utils.conf import set_dynamic_settings
@@ -288,6 +289,7 @@ else:
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
+SITE_TITLE = 'Экодозор'
 
 # Название папки с картинками для вывода в карусели на странице /about/
 # папка должна находится в /static/

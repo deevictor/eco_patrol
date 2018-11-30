@@ -560,7 +560,7 @@ body .secondary-nav ul.navigation li.has-child > .wrapper > .nav-wrapper > ul > 
     padding: 8px;
     cursor: pointer;
     position: absolute;
-    bottom: 0;
+    bottom: -13px;
     height: 28px;
     right: 10px;
     margin: auto;
@@ -10964,4 +10964,13 @@ legend {
 
 input#id_about::placeholder, input#id_name::placeholder, input#id_email::placeholder, input#id_phone::placeholder, textarea#id_description::placeholder {
     color: #fff
+}
+
+.btn-success {
+    border-radius: 40px;
+    font-size: 11px;
+    padding: 4px 7px;
+    background-color: #096710;
+    color: #fff;
+    border-color: #15751b;
 }

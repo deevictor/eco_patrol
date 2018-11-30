@@ -23,3 +23,21 @@ class UserRegisterForm(ProfileForm):
         model = User
         fields = ("first_name", "last_name", "middle_name", "phone", "city",
                   "email", "username", "password1", "password2", "agree")
+
+
+class InspectorForm(forms.ModelForm):
+    """Форма для запроса статуса инспектора"""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs['readonly'] = True
+        self.fields['last_name'].widget.attrs['readonly'] = True
+        self.fields['middle_name'].widget.attrs['readonly'] = True
+        self.fields['phone'].widget.attrs['readonly'] = True
+        self.fields['registration'].required = True
+        self.fields['education'].required = True
+
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "middle_name", "phone",
+                  "registration", "education")
