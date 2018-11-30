@@ -13,17 +13,19 @@ def labels_json(request):
     Словарь можно получить по ссылке
     """
     geos = []
-    SOLVED_COLOR = '#3b5998'
+    SOLVED_COLOR = '#0095b6'
+    icon_type = 'darkgreenDotIcon'
 
     for label in Label.objects.filter(approved=True).select_related(
             'category'
     ).prefetch_related('image_set'):
-        # Если метка решена делаем синей,
+        # Если метка решена делаем голубой и убираем точку внутри метки,
         # иначе если метка имеет категорию,
         # задаем цвет этой категории, иначе ее цвет #000
         color = '#000000'
         if label.solved:
             color = SOLVED_COLOR
+            icon_type = 'icon'
         elif label.category:
             color = label.category.color
 
@@ -37,7 +39,8 @@ def labels_json(request):
             'name': label.name,
             'about': label.about,
             'form_comment': CommentForm(initial={'label': label.id}),
-            'comments': comments
+            'comments': comments,
+            'decision': label.decision.url
         })
 
         poly = {
@@ -56,10 +59,11 @@ def labels_json(request):
                 'description': label.description,
                 'name': label.name,
                 # текст при наведении мыши
-                'hintContent': '<strong></strong>',
+                'hintContent': f'<strong>{label.category.title}</strong>',
+                'decision': label.decision.url
             },
             'options': {
-                'preset': 'islands#darkgreenDotIcon',
+                'preset': f'islands#{icon_type}',
                 'iconColor': color,
                 'iconCaptionMaxWidth': '50',
                 'hideIconOnBalloonOpen': False,

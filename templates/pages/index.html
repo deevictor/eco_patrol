@@ -62,9 +62,9 @@
     <script type="text/javascript"
             src="{% static 'js/jquery.fancybox.min.js' %}"></script>
     <script type="text/javascript">
-    var user_auth = "{{user.is_authenticated|yesno:"true,false"}}";
-    var is_inspector = "{{ user.is_inspector|yesno:"true,false" }}";
-    var usernamejs = "{{ user.username }}";
+        var user_auth = "{{user.is_authenticated|yesno:"true,false"}}";
+        var is_inspector = "{{ user.is_inspector|yesno:"true,false" }}";
+        var usernamejs = "{{ user.username }}";
 
         var category = [{% for category in categories %}
             '{{ category.title }}'{% if not forloop.last %},{% endif %}

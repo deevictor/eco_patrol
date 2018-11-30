@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 
 from apps.base.mixins import AdminYMapMixin
-
 from .models import Category, Comment, Image, Label
 
 

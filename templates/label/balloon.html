@@ -3,32 +3,46 @@
         <h2>{{ category }}</h2>
         <p class="map-images">
             {% for image in images %}
-            <a href="{{ image }}" data-fancybox="gallery" alt="">
-                <img src="{{ image }}" height="100">
-            </a>
+                <a href="{{ image }}" data-fancybox="gallery" alt="">
+                    <img src="{{ image }}" height="100">
+                </a>
             {% endfor %}
         </p>
         <p><strong>Описание:</strong></p>
         <p>{{ description }}</p>
-        {% if about  %}
+        {% if about %}
             <p><strong>Местоположение:</strong></p>
             <p>{{ about }}</p>
+        {% endif %}
+        {% if decision %}
+            <br/>
+            <p><strong>Решение:</strong></p>
+            <a href="{{ decision }}" data-fancybox="gallery">
+                <img src="{{ decision }}" height="100">
+            </a>
         {% endif %}
         <hr>
         <p>Информация предоставлена: <b>{{ name }}</b></p>
         <p> Поделиться:
-            <a class="circle-icon" target="_blank" href="https://twitter.com/share?text={{ description }}&url={{ url }}">
+            <a class="circle-icon" target="_blank"
+               href="https://twitter.com/share?text={{ description }}&url={{ url }}">
                 <i class="social_twitter"></i>
             </a>
-            <a class="circle-icon" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url }}">
+            <a class="circle-icon" target="_blank"
+               href="https://www.facebook.com/sharer/sharer.php?u={{ url }}">
                 <i class="social_facebook"></i>
             </a>
-            <a class="circle-icon" target="_blank" href="https://connect.ok.ru/offer?url={{ url }}&title=TITLE&imageUrl=IMAGE_URL">ok</a>
-            <a class="circle-icon" target="_blank" href="http://vkontakte.ru/share.php?url={{ url }}">vk</a>
-            <a class="circle-icon" target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url={{ url }}">
+            <a class="circle-icon" target="_blank"
+               href="https://connect.ok.ru/offer?url={{ url }}&title=TITLE&imageUrl=IMAGE_URL">ok</a>
+            <a class="circle-icon" target="_blank"
+               href="http://vkontakte.ru/share.php?url={{ url }}">vk</a>
+            <a class="circle-icon" target="_blank"
+               href="http://www.linkedin.com/shareArticle?mini=true&url={{ url }}">
                 <i class="social_linkedin"></i>
             </a>
-            <a class="circle-icon share-link" data-placement="left" data-html="true" data-content="<textarea rows=&#x22;1&#x22; class=&#x22;copy-url&#x22; readonly tabindex=&#x22;-1&#x22;></textarea>">
+            <a class="circle-icon share-link" data-placement="left"
+               data-html="true"
+               data-content="<textarea rows=&#x22;1&#x22; class=&#x22;copy-url&#x22; readonly tabindex=&#x22;-1&#x22;></textarea>">
                 <i class="social_share"></i>
             </a>
         </p>
@@ -40,24 +54,27 @@
                 </button>
             </div>
             <div class="form comment-form inputs-underline">
-                <form hidden="True" action="{% url 'label:ajax_comment' %}" class="ajax_comment" method="POST">{%
+                <form hidden="True" action="{% url 'label:ajax_comment' %}"
+                      class="ajax_comment" method="POST">{%
                     csrf_token %}
                     {{ form_comment.errors }}
                     {% for hidden in form_comment.hidden_fields %}
-                    {{ hidden }}{% endfor %}
+                        {{ hidden }}{% endfor %}
                     {% for field in form_comment.visible_fields %}
-                    <div class="form-group">
-                        {# {{ field.label_tag }}#}
-                        {{ field }}
-                        <span class="text-danger">{{ field.errors.as_text }}</span>
-                    </div>
+                        <div class="form-group">
+                            {# {{ field.label_tag }}#}
+                            {{ field }}
+                            <span class="text-danger">{{ field.errors.as_text }}</span>
+                        </div>
                     {% endfor %}
 
                     <div class="form-group">
-                        <button type="reset" class="form-control btn btn-default pull-left">
+                        <button type="reset"
+                                class="form-control btn btn-default pull-left">
                             Отменить
                         </button>
-                        <button type="submit" class="form-control btn btn-primary pull-right">
+                        <button type="submit"
+                                class="form-control btn btn-primary pull-right">
                             Отправить
                         </button>
                     </div>
@@ -65,19 +82,19 @@
             </div>
             <div class="comment-list">
                 {% for comment in comments %}
-                <div class="comment">
-                    <div>
-                        <div class="pull-left">
-                            <b>{{ comment.name }} </b>
+                    <div class="comment">
+                        <div>
+                            <div class="pull-left">
+                                <b>{{ comment.name }} </b>
+                            </div>
+                            <div class="pull-right">
+                                <i>{{ comment.submit_date }}</i>
+                            </div>
                         </div>
-                        <div class="pull-right">
-                            <i>{{ comment.submit_date }}</i>
+                        <div class="comment-text">
+                            {{ comment.text|linebreaks }}
                         </div>
                     </div>
-                    <div class="comment-text">
-                        {{ comment.text|linebreaks }}
-                    </div>
-                </div>
                 {% endfor %}
             </div>
         </div>
