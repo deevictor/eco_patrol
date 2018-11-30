@@ -8,7 +8,7 @@ class FeedbackAdmin(admin.ModelAdmin):
     """Отображает страницу в админке с сообщениями от пользователей.
     Используемая модель `feedback.Feedback`
     """
-    list_display = ('name', 'pub_time', )
+    list_display = ('name', 'pub_time',)
     readonly_fields = ('pub_time',)
 
 

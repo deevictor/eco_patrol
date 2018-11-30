@@ -15,10 +15,10 @@ class Feedback(models.Model):
         verbose_name='Дата и время создания сообщения'
     )
 
-    def __str__(self):
-        name, pub_time = self.name, self.pub_time
-        return f'{name} {pub_time}'
-
     class Meta:
         verbose_name = 'Обратная связь'
         verbose_name_plural = 'Обратная связь'
+
+    def __str__(self):
+        name, pub_time = self.name, self.pub_time
+        return f'{name} {pub_time}'

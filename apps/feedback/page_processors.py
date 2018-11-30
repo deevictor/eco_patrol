@@ -20,7 +20,7 @@ def contacts(request, page):
             form.save()
             flag = True
 
-    return{
+    return {
         'form': form,
         'flag': flag
     }

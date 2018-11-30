@@ -296,8 +296,6 @@ function init() {
     }
 
 
-
-
     category.push('Мои метки');
     var listBoxItems = category
             .map(function (title) {
@@ -344,16 +342,13 @@ function init() {
 
         //Немного закостылил так как не понимаю как адэкватно сделать
 
-        if(filters['Мои метки'])
-        {
+        if (filters['Мои метки']) {
             nameFilter[usernamejs] = true;
             delete filters['Мои метки'];
             categoryFilter = filters;
             objectManager.setFilter(getFilterFunction(categoryFilter));
             objectManager.setFilter(getFilterByName(nameFilter));
-        }
-        else
-        {
+        } else {
             nameFilter[usernamejs] = false;
             delete filters['Мои метки'];
             categoryFilter = filters;
@@ -370,8 +365,8 @@ function init() {
         }
     }
 
-    function getFilterByName(categories){
-        return function(obj){
+    function getFilterByName(categories) {
+        return function (obj) {
             var content = obj.properties.name;
             return categories[content]
         }
