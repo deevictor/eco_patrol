@@ -112,6 +112,11 @@ class Label(models.Model):
     def get_images(self):
         return [i.image.url for i in self.image_set.all()]
 
+    @property
+    def decision_url(self):
+        if self.decision and hasattr(self.decision, 'url'):
+            return self.decision.url
+
 
 class Image(models.Model):
     label = models.ForeignKey(Label, on_delete=models.CASCADE)
