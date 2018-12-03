@@ -58,7 +58,6 @@ $(document).on('submit', '#label_form', function (e) {
             if (data.status === 400) {
                 var errors = data.responseJSON.errors;
                 Object.keys(errors).forEach(function (key) {
-                    console.log(key);
                     var selector = "input[name=" + key + "] + span.text-danger"
                     $('#ajax_form').find(selector).html(errors[key])
                 })
