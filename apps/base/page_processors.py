@@ -30,8 +30,10 @@ def index(request, page):
                 'label': label
             })
 
+    form = LabelForm()
+
     return {
-        'form_label': LabelForm(),
+        'form_label': form,
         'body_class': 'page-index',
         'categories': Category.objects.all(),
         'balloon': balloon,
