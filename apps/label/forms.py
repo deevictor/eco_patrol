@@ -1,8 +1,7 @@
 # coding: utf-8
 from django import forms
-from django.conf import settings
-from django.core.exceptions import ValidationError
 
+from label.utils import LabelErrorsDict
 from .models import Comment, Label
 
 
@@ -19,16 +18,21 @@ class LabelForm(forms.ModelForm):
     :model:
     """
 
+    images = forms.FileField(label='Изображения', required=False,
+                             widget=forms.ClearableFileInput(
+                                 attrs={
+                                     'class': 'form-control',
+                                     'multiple': True, 'id': 'file'}))
+
     def __init__(self, *args, **kwargs):
         super(LabelForm, self).__init__(*args, **kwargs)
         self.fields['category'].empty_label = 'Категория метки'
-        self.fields['attach'].label = "Выберите файлы"
 
     class Meta:
         model = Label
         fields = (
             'about', 'category', 'name', 'phone',
-            'email', 'description', 'attach', 'point'
+            'email', 'description', 'point'
         )
         widgets = {
             'about': forms.TextInput(attrs={
@@ -57,19 +61,11 @@ class LabelForm(forms.ModelForm):
                 'class': 'form-control'
             }),
             'point': forms.HiddenInput(),
-            'attach': forms.ClearableFileInput(attrs={
-                'id': 'file',
-                'multiple': 'multiple'
-            }),
         }
 
-    def clean_attach(self):
-        attach = self.cleaned_data['attach']
-        if attach and attach.size > settings.MAX_UPLOAD_SIZE:
-            raise ValidationError(
-                'Среди прикрепленных файлов есть файлы с недопустимым размером'
-            )
-        return attach
+    def full_clean(self):
+        super().full_clean()
+        self._errors = LabelErrorsDict(self._errors)
 
 
 class CommentForm(forms.ModelForm):

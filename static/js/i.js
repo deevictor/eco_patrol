@@ -34,6 +34,11 @@ $.ajaxSetup({
 $(document).on('submit', '#label_form', function (e) {
     e.preventDefault();
     var data = new FormData(this);
+    var submitButtonText = "Отправить на рассмотрение";
+    var loadButtonText = "Обработка...";
+    $("#label_form :input").attr("disabled", true);
+    var submitButton = $("#label_form :input[type=submit]");
+    submitButton.html(loadButtonText);
     $(this).find("span.text-danger").html("");
     $.ajax({
         type: $(this).attr('method'),
@@ -42,19 +47,25 @@ $(document).on('submit', '#label_form', function (e) {
         cache: false,
         contentType: false,
         processData: false,
-        success: function (data, textStatus, jqXHR) {
-            if (data.errors === true) {
-                var errors = data.data;
-                Object.keys(errors).forEach(function (key) {
-                    var selector = "input[name=" + key + "]";
-                    $(selector).siblings('span').html(errors[key])
-                })
-            } else if (data.errors === false) {
-                $(".label-wrapper").css("width", "0");
-                $(this).trigger("reset");
-            }
+        success: function () {
+            $(".label-wrapper").css("width", "0");
+            $('#label_form').trigger("reset");
+            $("#label_form :input").attr("disabled", false);
+            submitButton.html(submitButtonText);
         },
+
         error: function (data) {
+            if (data.status === 400) {
+                var errors = data.responseJSON.errors;
+                Object.keys(errors).forEach(function (key) {
+                    var selector = "input[name=" + key + "] + span.text-danger"
+                    $('#ajax_form').find(selector).html(errors[key])
+                })
+            } else if (data.status === 0) {
+                alert('Сервер недоступен    ')
+            }
+            $("#ajax_form :input").attr("disabled", false);
+            submitButton.html(submitButtonText);
         },
     });
     return false;

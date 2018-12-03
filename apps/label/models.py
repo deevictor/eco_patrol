@@ -45,11 +45,6 @@ class Label(models.Model):
     description = models.TextField(
         verbose_name='Описание'
     )
-    attach = models.ImageField(
-        null=True, blank=True,
-        upload_to='attach/',
-        verbose_name='Прикрепленный файл'
-    )
     name = models.CharField(
         max_length=254,
         verbose_name='ФИО',

@@ -1,25 +1,38 @@
 <form action="{% url 'label:label_form' %}" method="post" id="label_form"
-      enctype="multipart/form-data" novalidate>
-    {% csrf_token %}
+      enctype="multipart/form-data" novalidate>{% csrf_token %}
     {{ form_label.errors }}
-    {% for hidden in form_label.hidden_fields %}{{ hidden }}{% endfor %}
+    {% for hidden in form_label.hidden_fields %}
+        <div class="form-group">
+            {{ hidden }}
+            <span class="text-danger">{{ field.errors.as_text }}</span>
+        </div>
+    {% endfor %}
+
     <div class="row">
         <div class="col-md-8 col-sm-8">
-            {% for field in form_label.visible_fields %}
-                {% if field.name != 'description' %}
-                    {% if field.name != 'name' %}
-                        <div class="col-md-4 col-sm-6">
-                            {{ field }}
-                            {% if field.name == 'attach' %}
-                                <label for="file">{{ field.label }}</label>
-                                <span id="files_count"
-                                      style="margin-left: 10px; color: #fff;"></span>
-                            {% endif %}
-                            <span class="text-danger">{{ field.errors.as_text }}</span>
-                        </div>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
+            <div class="col-md-4 col-sm-6">
+                {{ form_label.about }}
+                <span class="text-danger">{{ form_label.about.errors.as_text }}</span>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                {{ form_label.category }}
+                <span class="text-danger">{{ form_label.category.errors.as_text }}</span>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                {{ form_label.phone }}
+                <span class="text-danger">{{ form_label.phone.errors.as_text }}</span>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                {{ form_label.email }}
+                <span class="text-danger">{{ form_label.email.errors.as_text }}</span>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                {{ form_label.images }}
+                <label for="file">{{ form_label.images.label }}</label>
+                <span id="files_count"
+                      style="margin-left: 10px; color: #fff;"></span>
+                <span class="text-danger">{{ form_label.images.errors.as_text }}</span>
+            </div>
         </div>
         <div class="col-md-4 col-sm-4">
             {{ form_label.description }}
