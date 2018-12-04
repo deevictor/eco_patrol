@@ -908,11 +908,6 @@ $("[data-show-after-scroll]").each(function() {
     });
 });
 
-$('#id_city').kladr({
-    type: $.kladr.type.city
-});
-
-
 $('.print_button').click(function(){
     $('.for_printing').printThis();
 });

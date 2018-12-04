@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.urlresolvers import reverse
 from django.core.validators import RegexValidator
 from django.db import models
 
@@ -15,9 +16,11 @@ class User(AbstractUser):
         )]
     )
 
-    city = models.CharField(
-        verbose_name='Город',
-        max_length=64
+    city = models.ForeignKey(
+        'City',
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name='Город'
     )
 
     is_inspector = models.BooleanField(
@@ -52,3 +55,46 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    @property
+    def get_admin_profile_url(self):
+        """Возвращает ссылку на профиль пользователя в админке."""
+        return reverse('admin:user_user_change', args=(self.pk,))
+
+
+class City(models.Model):
+    """Города для пользователей."""
+
+    name = models.CharField(
+        verbose_name='Город',
+        max_length=64
+    )
+
+    latitude = models.DecimalField(
+        verbose_name='Широта',
+        max_digits=10,
+        decimal_places=7
+    )
+
+    longitude = models.DecimalField(
+        verbose_name='Долгота',
+        max_digits=10,
+        decimal_places=7
+    )
+
+    type_of_region = models.CharField(
+        verbose_name='Тип региона',
+        max_length=64
+    )
+
+    region = models.CharField(
+        verbose_name='Регион',
+        max_length=64
+    )
+
+    class Meta:
+        verbose_name = 'Город'
+        verbose_name_plural = 'Города'
+
+    def __str__(self):
+        return f'{self.name},  {self.region} {self.type_of_region}'
