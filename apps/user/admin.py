@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from mezzanine.accounts.admin import UserProfileAdmin
 
-from .models import User
+from .models import City, User
 
 
 class UserAdmin(UserProfileAdmin):
@@ -37,3 +37,4 @@ class UserAdmin(UserProfileAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+admin.site.register(City)

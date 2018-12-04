@@ -1,0 +1,12 @@
+<div style="max-height: 500px;">
+    <div class="balloon-wrapper">
+        <a href="{{ user.get_admin_profile_url }}" target= "_blank"><h4>{{ user_full_name }}</h4></a>
+
+        <p><strong>Описание:</strong></p>
+        <p>Телефон: {{ user.phone }}</p>
+        <p>Почта: {{ user.email }}</p>
+        <p>Город: {{ user.city }}</p>
+
+        <hr>
+    </div>
+</div>

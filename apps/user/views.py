@@ -1,7 +1,7 @@
 # coding: utf-8
-from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.template.response import TemplateResponse
 
 from .forms import InspectorForm
 

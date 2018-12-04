@@ -47,7 +47,8 @@ function init() {
         clusterize: true,
         // ObjectManager принимает те же опции, что и кластеризатор.
         gridSize: 32,
-        clusterDisableClickZoom: false,
+        clusterDisableClickZoom: true,
+        groupByCoordinates: true,
 
     });
 
@@ -126,13 +127,13 @@ function init() {
         balloonLayout: BalloonLayout,
         balloonContentLayout: BalloonContentLayout,
     });
-    objectManager.clusters.options.set('clusterDisableClickZoom', false);
-    objectManager.clusters.options.set('preset', 'islands#invertedDarkgreenClusterIcons');
     myMap.geoObjects.add(objectManager);
 
     $.ajax({
         url: "/label/labels_json/"
     }).done(function (data) {
+        objectManager.options.set('hasBalloon', data.clusterBalloon);
+        objectManager.options.set('preset', 'islands#darkgreenClusterIcons');
         objectManager.add(data);
 
         // Обработка событий карты:
