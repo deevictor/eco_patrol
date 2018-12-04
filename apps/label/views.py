@@ -1,4 +1,6 @@
 # coding: utf-8
+from user.models import User
+
 from django.http import JsonResponse
 from django.template.loader import get_template
 
@@ -14,6 +16,7 @@ def labels_json(request):
     """
     geos = []
     SOLVED_COLOR = '#0095b6'
+    INSPECTOR_COLOR = 'darkGreen'
     icon_type = 'darkgreenDotIcon'
 
     for label in Label.objects.filter(approved=True).select_related(
@@ -71,9 +74,59 @@ def labels_json(request):
         }
         geos.append(poly)
 
+    for user in User.objects.filter(
+        is_inspector=True, city__isnull=False
+    ).select_related(
+        'city'
+    ):
+        icon_type = 'darkGreenCircleIcon'
+        color = INSPECTOR_COLOR
+        template_message = get_template('label/inspector_balloon_form.html')
+        if request.user.is_superuser:
+            balloon_content = template_message.render({
+                'user': user,
+                'user_full_name':
+                    f'{user.first_name} {user.middle_name} {user.last_name}'
+            })
+            cluster_caption = user.username
+            open_balloon_on_click = True
+            cluster_balloon = True
+        else:
+            balloon_content = None
+            cluster_caption = None
+            open_balloon_on_click = False
+            cluster_balloon = False
+
+        inspector = {
+            'type': 'Feature',
+            'id': f'user_{user.id}',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [user.city.latitude, user.city.longitude],
+            },
+            'properties': {
+                'clusterCaption': cluster_caption,
+                'balloonContentBody': balloon_content,
+                'name': user.username,
+                # текст при наведении мыши
+                'hintContent': 'Инспекторы',
+                # 1 для отображения в случае когда в городе всего один инспектор
+                'iconContent': '1',
+            },
+            'options': {
+                'preset': f'islands#{icon_type}',
+                'iconColor': color,
+                'iconCaptionMaxWidth': '50',
+                'hideIconOnBalloonOpen': False,
+                'openBalloonOnClick': open_balloon_on_click
+            }
+        }
+        geos.append(inspector)
+
     return JsonResponse({
         'type': 'FeatureCollection',
         'features': geos,
+        'clusterBalloon': cluster_balloon,
     })
 
 

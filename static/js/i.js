@@ -71,34 +71,6 @@ $(document).on('submit', '#label_form', function (e) {
     return false;
 });
 
-$(document).on('submit', '.user_form', function (e) {
-    e.preventDefault();
-    var data = new FormData(this);
-    $(this).find("span.text-danger").html("");
-    $.ajax({
-        type: $(this).attr('method'),
-        url: $(this).attr('action'),
-        data: data,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data, textStatus, jqXHR) {
-            if (data.errors === true) {
-                var errors = data.data;
-                Object.keys(errors).forEach(function (key) {
-                    var selector = "input[name=" + key + "]";
-                    $(selector).siblings('span').text(errors[key])
-                });
-                $('#form_errors').html(data.message);
-            } else if (data.errors === false) {
-                $(location).attr('href', data.url)
-            }
-        },
-        error: function (data) {
-        },
-    });
-    return false;
-});
 
 $(document).on('submit', '.ajax_comment', function (e) {
     e.preventDefault();
