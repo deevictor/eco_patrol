@@ -126,7 +126,6 @@ def labels_json(request):
     return JsonResponse({
         'type': 'FeatureCollection',
         'features': geos,
-        'clusterBalloon': cluster_balloon,
     })
 
 
