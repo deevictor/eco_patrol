@@ -132,6 +132,9 @@ function init() {
     $.ajax({
         url: "/label/labels_json/"
     }).done(function (data) {
+        if (data.clusterBalloon == false) {
+            objectManager.clusters.balloon.destroy();
+        }
         objectManager.options.set('preset', 'islands#darkgreenClusterIcons');
         objectManager.add(data);
 

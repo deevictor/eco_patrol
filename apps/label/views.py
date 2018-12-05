@@ -90,12 +90,12 @@ def labels_json(request):
             })
             cluster_caption = user.username
             open_balloon_on_click = True
-            cluster_balloon = True
+            has_balloon = True
         else:
             balloon_content = None
             cluster_caption = None
             open_balloon_on_click = False
-            cluster_balloon = False
+            has_balloon = False
 
         inspector = {
             'type': 'Feature',
@@ -126,6 +126,7 @@ def labels_json(request):
     return JsonResponse({
         'type': 'FeatureCollection',
         'features': geos,
+        'clusterBalloon': has_balloon,
     })
 
 
