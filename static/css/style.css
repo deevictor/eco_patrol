@@ -10879,12 +10879,6 @@ article > p > img {
     cursor: pointer;
 }
 
-article > p > img {
-    width: 75px !important;
-    height: 100%;
-    margin: 0 auto;
-}
-
 @media (max-height: 840px) {
     .balloon {
         max-height: calc(100% - 105px);
