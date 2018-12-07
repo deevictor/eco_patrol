@@ -24,7 +24,9 @@ class User(AbstractUser):
     )
 
     is_inspector = models.BooleanField(
-        'Статус инспектора',
+        verbose_name='Статус инспектора',
+        help_text='Указывает, что пользователь имеет статус инспектора'
+                  ' и может оставлять метки.',
         default=False,
     )
 
