@@ -59,7 +59,7 @@ class User(AbstractUser):
     @property
     def get_admin_profile_url(self):
         """Возвращает ссылку на профиль пользователя в админке."""
-        return reverse('admin:user_user_change', args=(self.pk,))
+        return reverse('admin:user_user_change', args=(self.id,))
 
 
 class City(models.Model):
