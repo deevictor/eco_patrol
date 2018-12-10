@@ -8,6 +8,7 @@ from base.fields import ColorField
 
 class Category(models.Model):
     """Категория меток"""
+
     title = models.CharField(
         max_length=254,
         unique=True,
@@ -135,6 +136,7 @@ class Decision(models.Model):
 
 class Comment(models.Model):
     """Комментарий к метке"""
+
     name = models.CharField(
         verbose_name='Имя',
         max_length=64
@@ -156,5 +158,6 @@ class Comment(models.Model):
 
     def __str__(self):
         name, date = self.name, self.submit_date
-        text = self.text[:mezzanine_conf.COMMENT_PREVIEW_SIZE] + '...'
+        comment_size = mezzanine_conf.COMMENT_PREVIEW_SIZE
+        text = self.text[:comment_size] + '...'
         return f'[{name} {date}] {text}'

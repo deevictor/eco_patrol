@@ -12,7 +12,8 @@ def list_pics(folder):
     :rtype: list
 
     """
-    extensions = ["*.png", "*.jpg", "*.jpeg", ]
+
+    extensions = ('*.png', '*.jpg', '*.jpeg',)
     pics_list = []
     for ext in extensions:
         img_path = glob.glob(
@@ -27,8 +28,10 @@ def list_pics(folder):
     # если цифр нет, то попадает в конец списка
     pics_sorted = sorted(
         pics_list,
-        key=lambda s: [int(t) if t.isdigit() else t.lower() for t in
-                       re.split('(\d+)', s)]
+        key=lambda s: [
+            int(t) if t.isdigit() else t.lower()
+            for t in re.split(r'(\d+)', s)
+        ]
     )
 
     return pics_sorted

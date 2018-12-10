@@ -15,7 +15,7 @@ def index(request, page):
     body_class (str): Глобальный класс css для всей страницы
     """
     try:
-        balloon = Label.objects.get(id=request.GET.get("id_balloon", 0))
+        balloon = Label.objects.get(id=request.GET.get('id_balloon', 0))
     except Label.DoesNotExist:
         balloon = None
 

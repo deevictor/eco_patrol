@@ -62,7 +62,7 @@ $(document).on('submit', '#label_form', function (e) {
                     $('#ajax_form').find(selector).html(errors[key])
                 })
             } else if (data.status === 0) {
-                alert('Сервер недоступен    ')
+                alert('Сервер недоступен')
             }
             $("#ajax_form :input").attr("disabled", false);
             submitButton.html(submitButtonText);
@@ -91,7 +91,7 @@ $(document).on('submit', '.ajax_comment', function (e) {
                     $('#label_form').find(selector).html(errors[key])
                 })
             } else if (data.errors === false) {
-                var form = $(e.target)
+                var form = $(e.target);
                 form.trigger('reset');
                 form.hide();
                 form.parent().parent().find(".add-button").show();

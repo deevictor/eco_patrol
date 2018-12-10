@@ -5,12 +5,15 @@ from .forms import FeedbackForm
 
 @processor_for('contacts')
 def contacts(request, page):
-    """Отображает страницу контактов
+    """
+    Отображает страницу контактов
 
-        Контексты:
-        form (object): форма для отправки сообщений пользователями
-        flag (bool):  если True то форма на странице не показывается
-        """
+    Контексты:
+    form (object): форма для отправки сообщений пользователями
+    flag (bool):  если True то форма на странице не показывается
+
+    """
+
     form = FeedbackForm()
     flag = False
 

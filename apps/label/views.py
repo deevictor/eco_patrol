@@ -1,4 +1,5 @@
 # coding: utf-8
+from django.conf import settings
 from django.http import JsonResponse
 from django.template.loader import get_template
 
@@ -8,15 +9,17 @@ from .models import Image, Label
 
 
 def labels_json(request):
-    """Возвращает гео-словарь меток на карте.
+    """
+    Возвращает гео-словарь меток на карте.
     Данные берутся из model: `label.Label`.
     Отображаются записи только те, что утверждены админом
     Словарь можно получить по ссылке
+
     """
+
     geos = []
-    SOLVED_COLOR = '#0095b6'
-    INSPECTOR_COLOR = 'darkGreen'
-    icon_type = 'darkgreenDotIcon'
+
+    icon_type = 'dotIcon'
     has_balloon = False
 
     for label in Label.objects.filter(approved=True).select_related(
@@ -27,7 +30,7 @@ def labels_json(request):
         # задаем цвет этой категории, иначе ее цвет #000
         color = '#000000'
         if label.solved:
-            color = SOLVED_COLOR
+            color = settings.SOLVED_COLOR
             icon_type = 'icon'
         elif label.category:
             color = label.category.color
@@ -80,7 +83,7 @@ def labels_json(request):
         'city'
     ):
         icon_type = 'darkGreenCircleIcon'
-        color = INSPECTOR_COLOR
+        color = settings.INSPECTOR_COLOR
         template_message = get_template('label/inspector_balloon_form.html')
         if request.user.is_superuser:
             balloon_content = template_message.render({
@@ -130,7 +133,8 @@ def labels_json(request):
 
 
 def label_form(request):
-    """Метод для отправки формы без перезагрузки.
+    """
+    Метод для отправки формы без перезагрузки.
     Создание метки на карте пользователем.
     Используемая модель `label.Label`
 
@@ -138,7 +142,9 @@ def label_form(request):
         error (bool): наличие ошибки
         data (dict): данные формы
         message (str): описание ошибки
+
     """
+
     success_message = 'Сообщение отправлено!'
     failure_message = 'Исправьте ошибки формы!'
 
@@ -177,6 +183,7 @@ def label_form(request):
 def ajax_comment(request):
     """Метод для отправки комментария без перезагрузки страницы
     """
+
     result = {'errors': False, 'data': {}, 'message': ''}
     if request.method == 'POST' and request.is_ajax():
         form = CommentForm(request.POST)
