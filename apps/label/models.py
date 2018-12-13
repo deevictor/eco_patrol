@@ -104,6 +104,10 @@ class Label(models.Model):
 
     @property
     def get_decisions(self):
+        """
+        Возвращает список ссылок на картинки с решением, если метка помечена
+        как имеющая решение или пустой список
+        """
         return [
             i.decision.url for i in self.decision_set.all()
         ] if self.solved else []
