@@ -8,6 +8,7 @@ from base.fields import ColorField
 
 class Category(models.Model):
     """Категория меток"""
+
     title = models.CharField(
         max_length=254,
         unique=True,
@@ -70,7 +71,7 @@ class Label(models.Model):
         unique=True
     )
     approved = models.BooleanField(
-        default=True,
+        default=False,
         verbose_name='Одобрено админом'
     )
     in_top = models.BooleanField(
@@ -80,11 +81,6 @@ class Label(models.Model):
     solved = models.BooleanField(
         default=False,
         verbose_name='Проблема решена'
-    )
-    decision = models.FileField(
-        null=True, blank=True,
-        upload_to='decision/',
-        verbose_name='Решение'
     )
     pub_time = models.DateTimeField(
         auto_now_add=True,
@@ -108,18 +104,43 @@ class Label(models.Model):
         return [i.image.url for i in self.image_set.all()]
 
     @property
-    def decision_url(self):
-        if self.decision and hasattr(self.decision, 'url'):
-            return self.decision.url
+    def get_decisions(self):
+        """
+        Возвращает список ссылок на картинки с решением, если метка помечена
+        как имеющая решение или пустой список
+        """
+        return [
+            i.decision.url for i in self.decision_set.all()
+        ] if self.solved else []
 
 
 class Image(models.Model):
     label = models.ForeignKey(Label, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='labels/')
+    image = models.ImageField(
+        upload_to='labels/',
+        verbose_name='Картинка'
+    )
+
+    class Meta:
+        verbose_name = 'Картинки'
+        verbose_name_plural = 'Картинки'
+
+
+class Decision(models.Model):
+    label = models.ForeignKey(Label, on_delete=models.CASCADE)
+    decision = models.ImageField(
+        upload_to='decision/',
+        verbose_name='Решение'
+    )
+
+    class Meta:
+        verbose_name = 'Решение'
+        verbose_name_plural = 'Решение'
 
 
 class Comment(models.Model):
     """Комментарий к метке"""
+
     name = models.CharField(
         verbose_name='Имя',
         max_length=64
@@ -141,5 +162,6 @@ class Comment(models.Model):
 
     def __str__(self):
         name, date = self.name, self.submit_date
-        text = self.text[:mezzanine_conf.COMMENT_PREVIEW_SIZE] + '...'
+        comment_size = mezzanine_conf.COMMENT_PREVIEW_SIZE
+        text = self.text[:comment_size] + '...'
         return f'[{name} {date}] {text}'

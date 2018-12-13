@@ -3,6 +3,7 @@ from django.db import models
 
 class Feedback(models.Model):
     """Обратная связь."""
+
     name = models.CharField(
         max_length=254,
         verbose_name='Имя'

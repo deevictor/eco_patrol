@@ -24,7 +24,9 @@ class User(AbstractUser):
     )
 
     is_inspector = models.BooleanField(
-        'Статус инспектора',
+        verbose_name='Статус инспектора',
+        help_text='Указывает, что пользователь имеет статус инспектора'
+                  ' и может оставлять метки.',
         default=False,
     )
 
@@ -59,7 +61,7 @@ class User(AbstractUser):
     @property
     def get_admin_profile_url(self):
         """Возвращает ссылку на профиль пользователя в админке."""
-        return reverse('admin:user_user_change', args=(self.pk,))
+        return reverse('admin:user_user_change', args=(self.id,))
 
 
 class City(models.Model):
@@ -93,6 +95,7 @@ class City(models.Model):
     )
 
     class Meta:
+        ordering = ('name',)
         verbose_name = 'Город'
         verbose_name_plural = 'Города'
 
