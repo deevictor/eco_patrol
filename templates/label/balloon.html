@@ -3,8 +3,8 @@
         <h2>{{ category }}</h2>
         <p class="map-images">
             {% for image in images %}
-                <a href="{{ image }}" data-fancybox="gallery" alt="">
-                    <img src="{{ image }}" height="100">
+                <a href="{{ image }}" data-fancybox="gallery">
+                    <img src="{{ image }}" height="100" alt="">
                 </a>
             {% endfor %}
         </p>
@@ -17,9 +17,13 @@
         {% if decision %}
             <br/>
             <p><strong>Решение:</strong></p>
-            <a href="{{ decision }}" data-fancybox="gallery">
-                <img src="{{ decision }}" height="100">
-            </a>
+            <p class="map-images">
+                {% for img in decision %}
+                    <a href="{{ img }}" data-fancybox="gallery">
+                        <img src="{{ img }}" height="100" alt="">
+                    </a>
+                {% endfor %}
+            </p>
         {% endif %}
         <hr>
         <p>Информация предоставлена: <b>{{ name }}</b></p>
@@ -54,15 +58,13 @@
                 </button>
             </div>
             <div class="form comment-form inputs-underline">
-                <form hidden="True" action="{% url 'label:ajax_comment' %}"
-                      class="ajax_comment" method="POST">{%
-                    csrf_token %}
+                <form hidden="hidden" action="{% url 'label:ajax_comment' %}"
+                      class="ajax_comment" method="POST">
                     {{ form_comment.errors }}
                     {% for hidden in form_comment.hidden_fields %}
                         {{ hidden }}{% endfor %}
                     {% for field in form_comment.visible_fields %}
                         <div class="form-group">
-                            {# {{ field.label_tag }}#}
                             {{ field }}
                             <span class="text-danger">{{ field.errors.as_text }}</span>
                         </div>

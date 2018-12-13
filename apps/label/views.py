@@ -1,9 +1,8 @@
 # coding: utf-8
-from user.models import User
-
 from django.http import JsonResponse
 from django.template.loader import get_template
 
+from user.models import User
 from .forms import CommentForm, LabelForm
 from .models import Image, Label
 
@@ -18,6 +17,7 @@ def labels_json(request):
     SOLVED_COLOR = '#0095b6'
     INSPECTOR_COLOR = 'darkGreen'
     icon_type = 'darkgreenDotIcon'
+    has_balloon = False
 
     for label in Label.objects.filter(approved=True).select_related(
             'category'
@@ -43,7 +43,7 @@ def labels_json(request):
             'about': label.about,
             'form_comment': CommentForm(initial={'label': label.id}),
             'comments': comments,
-            'decision': label.decision_url
+            'decision': label.get_decisions
         })
 
         poly = {
@@ -63,7 +63,7 @@ def labels_json(request):
                 'name': label.name,
                 # текст при наведении мыши
                 'hintContent': f'<strong>{label.category.title}</strong>',
-                'decision': label.decision_url
+                'decision': label.get_decisions
             },
             'options': {
                 'preset': f'islands#{icon_type}',
@@ -75,7 +75,7 @@ def labels_json(request):
         geos.append(poly)
 
     for user in User.objects.filter(
-        is_inspector=True, city__isnull=False
+            is_inspector=True, city__isnull=False
     ).select_related(
         'city'
     ):
@@ -95,7 +95,6 @@ def labels_json(request):
             balloon_content = None
             cluster_caption = None
             open_balloon_on_click = False
-            has_balloon = False
 
         inspector = {
             'type': 'Feature',

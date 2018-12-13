@@ -3,8 +3,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 
 from apps.base.mixins import AdminYMapMixin
-
-from .models import Category, Comment, Image, Label
+from .models import Category, Comment, Decision, Image, Label
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -17,10 +16,17 @@ class CategoryAdmin(admin.ModelAdmin):
             f'<div style="background: {obj.color}">{obj.color}</div>'
         )
 
+    get_color.short_description = 'Цвет метки'
+
 
 class ImageInline(admin.TabularInline):
     """Отображает фотографии метки"""
     model = Image
+    extra = 0
+
+
+class DecisionInline(admin.TabularInline):
+    model = Decision
     extra = 0
 
 
@@ -39,7 +45,7 @@ class LabelAdmin(AdminYMapMixin, admin.ModelAdmin):
         'solved'
     )
     list_editable = ('approved', 'in_top', 'solved')
-    inlines = [ImageInline, CommentInline]
+    inlines = [DecisionInline, ImageInline, CommentInline]
 
 
 admin.site.register(Category, CategoryAdmin)
