@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
+
     'mezzanine.boot',
     'mezzanine.conf',
     'mezzanine.core',
@@ -71,7 +72,9 @@ INSTALLED_APPS = [
     'mezzanine.pages',
     'mezzanine.blog',
     'mezzanine.accounts',
+
     'sorl.thumbnail',
+
     'feedback',
     'base',
     'label',
@@ -136,7 +139,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'wsgi.application'
 
 AUTH_USER_MODEL = 'user.User'
-ACCOUNTS_PROFILE_FORM_CLASS = "user.forms.UserRegisterForm"
+ACCOUNTS_PROFILE_FORM_CLASS = 'user.forms.UserRegisterForm'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -239,43 +242,44 @@ RICHTEXT_ALLOWED_ATTRIBUTES = (
 )
 
 TINYMCE_DEFAULT_CONFIG = {
-    'theme': "advanced",
+    'theme': 'advanced',
     'relative_urls': False,
     'language': 'ru',
 }
 
 DASHBOARD_TAGS = (
-    ("mezzanine_tags.app_list",),
-    ("mezzanine_tags.recent_actions",),
+    ('mezzanine_tags.app_list',),
+    ('mezzanine_tags.recent_actions',),
     (),
 )
 
 ADMIN_MENU_ORDER = (
-    (u"Содержимое", (
-        "pages.Page",
-        (u"Новости", "blog.BlogPost"),
-        (u"Медиа-библиотека", "fb_browse"),
-        "feedback.Feedback",
+    ('Содержимое', (
+        'pages.Page',
+        ('Новости', 'blog.BlogPost'),
+        ('Медиа-библиотека', 'fb_browse'),
+        'feedback.Feedback',
     )),
-    (u"Пользователи", (
-        "user.User",
-        "auth.Group",
+    ('Пользователи', (
+        'user.User',
+        'auth.Group',
+        'user.City',
     )),
-    (u"Карта", (
-        "label.Category",
-        "label.Label",
+    ('Карта', (
+        'label.Category',
+        'label.Label',
     )),
-    (u"Прочее", (
-        "conf.Setting",
-        "sites.Site",
+    ('Прочее', (
+        'conf.Setting',
+        'sites.Site',
     )),
 )
 
 PAGE_MENU_TEMPLATES = (
-    (1, u'Главное меню', 'pages/menus/header_menu.html'),
+    (1, 'Главное меню', 'pages/menus/header_menu.html'),
 )
 
-BLOG_SLUG = "news"
+BLOG_SLUG = 'news'
 
 MAX_UPLOAD_SIZE = 104857600
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760
@@ -294,3 +298,8 @@ SITE_TITLE = 'Экодозор'
 # Название папки с картинками для вывода в карусели на странице /about/
 # папка должна находится в /static/
 ABOUT_PICS_FOLDER = 'img/about/'
+
+# Цвет решенной метки
+SOLVED_COLOR = '#0095b6'
+# Цвет иконки инспекторов
+INSPECTOR_COLOR = 'darkGreen'

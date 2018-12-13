@@ -21,8 +21,12 @@ class UserRegisterForm(ProfileForm):
 
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "middle_name", "phone", "city",
-                  "email", "username", "password1", "password2", "agree")
+        fields = (
+            'first_name', 'last_name', 'middle_name',
+            'phone', 'city', 'email',
+            'username', 'password1', 'password2',
+            'agree',
+        )
 
 
 class InspectorForm(forms.ModelForm):
@@ -39,5 +43,7 @@ class InspectorForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "middle_name", "phone",
-                  "registration", "education")
+        fields = (
+            'first_name', 'last_name', 'middle_name',
+            'phone', 'registration', 'education',
+        )

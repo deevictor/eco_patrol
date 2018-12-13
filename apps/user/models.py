@@ -95,6 +95,7 @@ class City(models.Model):
     )
 
     class Meta:
+        ordering = ('name',)
         verbose_name = 'Город'
         verbose_name_plural = 'Города'
 
