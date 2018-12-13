@@ -9,7 +9,7 @@
             {% endfor %}
         </p>
         <p><strong>Описание:</strong></p>
-        <p>{{ description|linebreaks }}</p>
+        <p>{{ description|safe|linebreaks }}</p>
         {% if about %}
             <p><strong>Местоположение:</strong></p>
             <p>{{ about }}</p>
