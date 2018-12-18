@@ -10906,6 +10906,36 @@ article > p > img {
     }
 }
 
+@media screen and (max-width: 768px) {
+    .logopic {
+        display: none;
+    }
+
+    #page-footer {
+        display: none !important;
+    }
+
+    .label-wrapper {
+        left: 50%;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        height: 65%;
+        bottom: 40px;
+        padding-bottom: 25px;
+    }
+
+    #submitLabel {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    body .primary-nav, body .secondary-nav {
+        padding-right: 15px;
+    }
+}
+
 input[type="file"] {
     width: 0.1px;
     height: 0.1px;

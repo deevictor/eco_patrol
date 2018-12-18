@@ -50,9 +50,9 @@
              data-owl-loop="1" data-owl-auto-width="0" data-owl-nav="1"
              data-owl-dots="1"
              data-owl-nav-container="#gallery-nav">
-            {% for img in request.about_pics %}
+            {% for img in pics_list %}
                 <div class="item"
-                     style="background-image: url('{% static ABOUT_PICS_FOLDER %}{{ img }}');">
+                     style="background-image: url('{% static pics_folder %}{{ img }}');">
                 </div>
             {% endfor %}
         </div>
