@@ -3,9 +3,11 @@
 {% load mezzanine_tags %}
 
 {% block content %}
-    {% ifequal page.get_absolute_url '/about/' %}
-        {% include 'about/about.html' %}
-    {% endifequal %}
+    {% if page.get_absolute_url == '/about/' %}
+        {% include 'carousel/carousel.html' with pics_list=request.about_pics pics_folder=ABOUT_PICS_FOLDER %}
+    {% elif page.get_absolute_url == '/become/' %}
+        {% include 'carousel/carousel.html' with pics_list=request.become_pics pics_folder=BECOME_PICS_FOLDER %}
+    {% endif %}
     <div class="row">
         <div class="col-md-9 col-sm-9">
             <section class="page-title">

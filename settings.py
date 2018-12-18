@@ -79,7 +79,7 @@ INSTALLED_APPS = [
     'base',
     'label',
     'user',
-    'about',
+    'carousel',
 ]
 
 MIDDLEWARE = [
@@ -100,7 +100,7 @@ MIDDLEWARE = [
     'mezzanine.pages.middleware.PageMiddleware',
     'mezzanine.core.middleware.FetchFromCacheMiddleware',
 
-    'about.middleware.AboutMiddleware'
+    'carousel.middleware.CarouselMiddleware',
 ]
 
 TEMPLATES = [
@@ -119,7 +119,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.template.context_processors.request',
                 'django.template.context_processors.tz',
-                'about.context_processors.about_pics',
+                'carousel.context_processors.carousel_pics',
                 'mezzanine.conf.context_processors.settings',
                 'mezzanine.pages.context_processors.page',
 
@@ -298,6 +298,7 @@ SITE_TITLE = 'Экодозор'
 # Название папки с картинками для вывода в карусели на странице /about/
 # папка должна находится в /static/
 ABOUT_PICS_FOLDER = 'img/about/'
+BECOME_PICS_FOLDER = 'img/become/'
 
 # Цвет решенной метки
 SOLVED_COLOR = '#0095b6'
