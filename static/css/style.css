@@ -10896,9 +10896,6 @@ article > p > img {
 }
 
 @media screen and (max-width: 410px) {
-    .label-wrapper {
-        width: 85%;
-    }
 
     .label-wrapper .form.search-form.inputs-underline {
         padding: 10px;
