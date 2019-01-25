@@ -33,6 +33,12 @@
                       style="margin-left: 10px; color: #fff;"></span>
                 <span class="text-danger">{{ form_label.images.errors.as_text }}</span>
             </div>
+                        <div class="col-md-4 col-sm-6">
+                {{ form_label.name }}
+                <label for="file">{{ form_label.name.label }}</label>
+                <span style="margin-left: 10px; color: #fff;"></span>
+                <span class="text-danger">{{ form_label.name.errors.as_text }}</span>
+            </div>
         </div>
         <div class="col-md-4 col-sm-4">
             {{ form_label.description }}
