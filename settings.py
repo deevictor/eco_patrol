@@ -284,7 +284,7 @@ PAGE_MENU_TEMPLATES = (
 BLOG_SLUG = 'news'
 
 MAX_UPLOAD_SIZE = 104857600
-FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760
+FILE_UPLOAD_MAX_MEMORY_SIZE = 104857600
 
 try:
     from mezzanine.utils.conf import set_dynamic_settings

@@ -266,8 +266,6 @@ function init() {
             }
         });
 
-    if (user_auth === 'true')
-        if (is_inspector === 'true')
             myMap.events.add('click', function (e) {
                 var coords = e.get('coords');
                 if (!myMap.balloon.isOpen()) {

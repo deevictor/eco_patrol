@@ -9965,6 +9965,7 @@ body::before {
         content: "sm";
     }
 
+
     /* line 45, ../scss/helpers/_responsive.scss */
     .categories-list .list-item .title h3 {
         display: block;
@@ -10024,6 +10025,8 @@ body::before {
     .hero-section .map-wrapper {
         width: 100%;
     }
+
+
 }
 
 @media (max-width: 767px) {
@@ -10155,6 +10158,8 @@ body::before {
     .modal .modal-item-detail.modal-dialog .modal-content .modal-body > .left section {
         padding-left: 0;
     }
+
+
 
     /* line 135, ../scss/helpers/_responsive.scss */
     #page-header .add-listing {
@@ -10841,6 +10846,7 @@ article > p > img {
     margin: 0 auto;
 }
 
+
 /* line 116, ../scss/helpers/_i.scss */
 .balloon p {
     margin-top: 10px;
@@ -10903,10 +10909,21 @@ article > p > img {
     }
 }
 
+@media screen and (max-width: 970px) {
+
+    .center-logo {
+        display: none;
+    }
+}
 @media screen and (max-width: 768px) {
     .logopic {
         display: none;
     }
+
+    .center-logo {
+    display: none;
+    }
+
 
     #page-footer {
         display: none !important;
