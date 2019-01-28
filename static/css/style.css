@@ -9986,6 +9986,7 @@ body::before {
         font-size: 16px;
     }
 
+
     /* line 59, ../scss/helpers/_responsive.scss */
     .pricing h2 {
         font-size: 20px;
@@ -10594,6 +10595,7 @@ body::before {
     background-color: #0AA031;
     box-shadow: 0 2px 3px #9c9696;
     border-radius: 5px;
+
 }
 
 #submitLabel {
@@ -10937,6 +10939,7 @@ article > p > img {
         height: 65%;
         bottom: 40px;
         padding-bottom: 25px;
+        overflow-y: scroll;
     }
 
     #submitLabel {
