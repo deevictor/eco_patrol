@@ -35,7 +35,6 @@
             </div>
                         <div class="col-md-4 col-sm-6">
                 {{ form_label.name }}
-                <label for="file">{{ form_label.name.label }}</label>
                 <span style="margin-left: 10px; color: #fff;"></span>
                 <span class="text-danger">{{ form_label.name.errors.as_text }}</span>
             </div>
@@ -44,12 +43,10 @@
             {{ form_label.description }}
             <span class="text-danger">{{ form_label.description.errors.as_text }}</span>
         </div>
-    </div>
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary center-block"
-                id="submitLabel">Отправить на
-            рассмотрение
+        <button type="submit" class="btn btn-primary center-block" id="submitLabel">
+            Отправить на рассмотрение
         </button>
+
     </div>
 </form>
