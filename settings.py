@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'mezzanine.pages',
     'mezzanine.blog',
     'mezzanine.accounts',
+    'leonid',
 
     'sorl.thumbnail',
 
