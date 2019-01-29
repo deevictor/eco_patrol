@@ -13,6 +13,8 @@ urlpatterns = [
     url('^user/', include('user.urls')),
     url("^$", page, {"slug": "/"}, name="home"),
     url('^', include('mezzanine.urls')),
+    url(r'^', include('leonid.urls')),
+
 ]
 
 urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
