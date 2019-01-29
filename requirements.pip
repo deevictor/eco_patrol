@@ -5,6 +5,7 @@ certifi==2018.8.24
 chardet==3.0.4
 Django==1.11.16
 django-contrib-comments==1.9.0
+django-fs-leonid==0.1.0
 django-grappelli==2.11.1
 filebrowser-safe==0.5.0
 flake8==3.5.0
@@ -28,3 +29,5 @@ tzlocal==1.5.1
 urllib3==1.23
 webencodings==0.5.1
 sorl-thumbnail==12.5.0
+
+
