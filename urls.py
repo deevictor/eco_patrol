@@ -8,13 +8,12 @@ from mezzanine.pages.views import page
 admin.autodiscover()
 
 urlpatterns = [
+    url(r'^', include('leonid.urls')),
     url('^admin/', include(admin.site.urls)),
     url('^label/', include('label.urls')),
     url('^user/', include('user.urls')),
     url("^$", page, {"slug": "/"}, name="home"),
     url('^', include('mezzanine.urls')),
-    url(r'^', include('leonid.urls')),
-
 ]
 
 urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
